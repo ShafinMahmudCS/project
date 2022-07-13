@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" type="text/css" href="index.css" title="style" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+    <script src="https://unpkg.com/mathjs/lib/browser/math.js"></script>
+    <title>My Chart</title>
+  </head>
+  <body>
+    <a id="header" href="index.html"><h1>Contaminant Transport Graphs</h1></a>
+
+    <h2>1D Slug Injection</h2>
+
+    <p>
+      <b>Constant Conditions:</b> <b>n</b> = 0.3, <b>alpha x</b> = 1 m,
+      <b>alpha y</b> = 0.1 m
+    </p>
+
+    <div class="container">
+      <div class="slidecontainer">
+        <input
+          type="range"
+          min="0"
+          max="1000"
+          step="50"
+          value="1000"
+          class="slider"
+          id="myRange"
+        />
+
+        <p>Value of concentration : <span class="demo"></span> mg/L</p>
+      </div>
+
+      <div class="slidecontainer2">
+        <input
+          type="range"
+          min="0.0000"
+          max="4.0000"
+          step="0.0001"
+          value="4.0"
+          class="slider"
+          id="myRange"
+        />
+
+        <p>Value of q: <span class="demo"></span></p>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="slidecontainer3">
+        <input
+          type="range"
+          min="0.0000000000"
+          max="0.0640000000"
+          value="0.0000000001"
+          step="0.0000000001"
+          class="slider"
+          id="myRange"
+        />
+
+        <p>Value of D*: <span class="demo"></span> m<sup>2</sup>/day</p>
+      </div>
+
+      <div class="slidecontainer4">
+        <input
+          type="range"
+          min="0"
+          max="75"
+          value="40"
+          class="slider"
+          id="myRange"
+        />
+
+        <p>Value of x: <span class="demo"></span> m</p>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="slidecontainer5">
+        <input
+          type="range"
+          min="0"
+          max="25"
+          step="0.5"
+          value="20"
+          class="slider"
+          id="myRange"
+        />
+
+        <p>Value of y: <span class="demo"></span> m</p>
+      </div>
+
+      <div class="slidecontainer6">
+        <input
+          type="range"
+          min="0"
+          max="50"
+          value="5"
+          class="slider"
+          id="myRange"
+        />
+
+        <p>Value of Area: <span class="demo"></span> m<sup>2</sup></p>
+      </div>
+    </div>
+
+    <div class="myCanvas">
+      <canvas id="canvas1"></canvas>
+    </div>
+
+    <button onclick="resetZoom()">Reset Zoom</button>
+    <button onclick="enableZoom(1.1)">Zoom In</button>
+    <button onclick="enableZoom(0.9)">Zoom Out</button>
+
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.8.0/chart.min.js"
+      integrity="sha512-sW/w8s4RWTdFFSduOTGtk4isV1+190E/GghVffMA9XczdJ2MDzSzLEubKAs5h0wzgSJOQTRYyaz73L3d6RtJSg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/hammer.js/2.0.8/hammer.min.js"
+      integrity="sha512-UXumZrZNiOwnTcZSHLOfcTs0aos2MzBWHXOHOuB0J/R44QB0dwY5JgfbvljXcklVf65Gc4El6RjZ+lnwd2az2g=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-zoom/1.2.1/chartjs-plugin-zoom.min.js"
+      integrity="sha512-klQv6lz2YR+MecyFYMFRuU2eAl8IPRo6zHnsc9n142TJuJHS8CG0ix4Oq9na9ceeg1u5EkBfZsFcV3U7J51iew=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+
+    <script src="slugT.js"></script>
+  </body>
+</html>
