@@ -26,38 +26,37 @@ function toggleZoom2(){
 
 var myZoom = false;
 
-var C0 = 650;
-var q = 4;
-var n = 0.3;
-var v = q/n;
+var C0 = 25;
+
+var q = 0.2;
+
+var n = 0.35;
+var v = q / n;
 var R = 1;
-var vR = v/R;
+var vR = v / R;
+var alpha = 1;
 
 var Dstar = 0.0000000001;
-var alphaX = 1;
-var alphaY = 0.1;
-var DL =  Dstar + (alphaX*v);
-var Dt = Dstar + (alphaY*v);
-var DLR = DL/R;
-var DtR = Dt/R;
+var D = Dstar + (alpha * v);
 
-var lambda = 1;
+var DR = D / R;
 
-var x = 22;
-var y = 5;
-var Area = 5;
+var distance = 80;
+
+var lambda = 90;
 
 var ctx2 = document.getElementById("canvas2");
 
-var tValues = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32];
+const tValues = [1, 5, 10, 20, 30, 40, 50, 60, 70, 80, 100, 120, 140, 160, 180, 200, 240, 280, 320, 360, 440, 520, 600, 680, 840, 1000];
 
 var tyValues = [];
 
-for(let i =0; i<tValues.length; i++){
+for (let i = 0; i < tValues.length; i++) {
   var obj = {};
   obj.x = tValues[i];
-  var C = C0*Area/(4*(Math.PI)*tValues[i]*Math.sqrt(DtR*DLR))*Math.exp(-((x-vR*tValues[i])**2)/(4*DLR*tValues[i])-y**2/(4*DtR*tValues[i]))*(Math.exp(-(Math.log(2)/lambda*tValues[i])));
-  obj.y = C;
+  var C2 = (C0 / 2) * (ERFC((distance - vR * tValues[i]) / (2 * Math.sqrt(DR * tValues[i]))) - (Math.exp(vR * distance / DR)) * (ERFC((distance + vR * tValues[i]) / (2 * Math.sqrt(DR * tValues[i]))))) * (Math.exp((-Math.log(2) / lambda) * tValues[i]));
+  obj.y = C2.toFixed(2);
+  console.log(C2);
   tyValues.push(obj);
 }
 
@@ -81,7 +80,7 @@ var chart2 = new Chart(ctx2,{
     scales: {
       x: {
         position: 'bottom',
-        min: 0, max:35,
+        min: 0, max:1000,
         title: {
           display: true,
           text: 'Time (days)',
@@ -92,7 +91,7 @@ var chart2 = new Chart(ctx2,{
       },
       y:{
         min: 0,
-        max: 10.0,
+        max: 35.0,
         position: 'left',
         title: {
           display: true,
@@ -117,7 +116,7 @@ var chart2 = new Chart(ctx2,{
     },
     zoom: {
       limits: {
-        x: {min: 0, max: 35},
+        x: {min: 0, max: 1000},
         y: {min: 0}
       },
       pan: {
@@ -138,41 +137,38 @@ var chart2 = new Chart(ctx2,{
   }
 }});
 
-var C0 = 650;
-var q = 4;
-var n = 0.3;
+var C0 = 25;
+
+var q = 0.2;
+
+var n = 0.35;
 var v = q/n;
 var R = 1;
 var vR = v/R;
+var alpha = 1;
 
 var Dstar = 0.0000000001;
-var alphaX = 1;
-var alphaY = 0.1;
-var DL =  Dstar + (alphaX*v);
-var Dt = Dstar + (alphaY*v);
-var DLR = DL/R;
-var DtR = Dt/R;
-var time = 20;
-var lambda = 1;
+var D =  Dstar + (alpha*v);
 
-var x = 75;
-var y = 20;
-var Area = 5;
+var DR = D/R;
+
+var lambda = 90;
+var time = 80;
 
 var ctx1 = document.getElementById("canvas1").getContext("2d");
 
-    const xValues = [0.01, 1, 5, 10, 20, 30, 40, 50, 60, 80, 100, 120, 140, 160, 180, 200, 220, 240, 260, 280, 300, 320, 340, 360, 380, 400, 420, 440, 460, 480, 500];
+  const xValues = [0, 5, 10, 15, 20, 30, 40, 50, 60, 70, 80, 100, 120, 140, 160, 180, 200, 220, 240, 260, 280, 300, 320, 340, 360, 380, 420, 460, 500];
 
-var xyValues = [];
+  var xyValues = [];
 
-for(let i =0; i<xValues.length; i++){
-  var obj = {};
-  obj.x = xValues[i];
-  var C = C0*Area/(4*(Math.PI)*time*Math.sqrt(DtR*DLR))*Math.exp(-((xValues[i]-vR*time)**2)/(4*DLR*time)-y**2/(4*DtR*time))*(Math.exp(-(Math.log(2)/lambda*time)));
-  obj.y = expo(C, 7);
-  xyValues.push(obj);
-  console.log(obj);
-}
+  console.log(Math.exp(-Math.log10(2)/lambda*time));
+  for(let i =0; i<xValues.length; i++){
+    var obj = {};
+    obj.x = xValues[i];
+    var C = (C0/2)*(ERFC((xValues[i]-vR*time)/(2*Math.sqrt(DR*time)))-(Math.exp(vR*xValues[i]/DR)*(ERFC((xValues[i]+vR*time)/(2*Math.sqrt(DR*time))))))*(Math.exp(-(Math.log(2)/lambda*time)));
+    obj.y = C.toFixed(2);
+    xyValues.push(obj);
+  }
 
 
 var chart1 = new Chart(ctx1,{
@@ -206,7 +202,7 @@ var chart1 = new Chart(ctx1,{
       },
       y:{
         min: 0,
-        max: 20.0,
+        max: 35.0,
         position: 'left',
         title: {
           display: true,
@@ -269,8 +265,6 @@ output[3].innerHTML = slider[3].value;
 myTime.innerHTML = slider[3].value;
 output[4].innerHTML = slider[4].value;
 output[5].innerHTML = slider[5].value;
-output[6].innerHTML = slider[6].value;
-output[7].innerHTML = slider[7].value;
   //function slider
 
   function mychart(){
@@ -278,38 +272,30 @@ output[7].innerHTML = slider[7].value;
     chart1.destroy();
 
     //initial conditions (without sorption)
-    var C0 = slider[0].value;
-    var q = slider[1].value;
-    var n = 0.3;
-    var v = q/n;
-    var R = slider[6].value;
-    var vR = v/R;
-    
+    var C0 = parseFloat(slider[0].value);
+    var q = parseFloat(slider[1].value);
+    var alpha = 1;
+  
+    var n = 0.35;
+    v = q / n;
+    var R = parseFloat(slider[4].value);
+    var vR = v / R;
     var Dstar = parseFloat(slider[2].value);
-    var alphaX = 1;
-    var alphaY = 0.1;
-    var DL =  Dstar + (alphaX*v);
-    var Dt = Dstar + (alphaY*v);
-    var DLR = DL/R;
-    var DtR = Dt/R;
-    var time = slider[3].value;
-    var lambda = slider[7].value;
+    var D = Dstar + (alpha * v);
+    var DR = D / R;
+    var time = parseFloat(slider[3].value);
+    var lambda = parseFloat(slider[5].value);
     
-    var x = 75;
-    var y = slider[4].value;
-    var Area = slider[5].value;
-    
-        const xValues = [0.01, 1, 5, 10, 20, 30, 40, 50, 60, 80, 100, 120, 140, 160, 180, 200, 220, 240, 260, 280, 300, 320, 340, 360, 380, 400, 420, 440, 460, 480, 500];
+    const xValues = [0, 5, 10, 15, 20, 30, 40, 50, 60, 70, 80, 100, 120, 140, 160, 180, 200, 220, 240, 260, 280, 300, 320, 340, 360, 380, 420, 460, 500];
     
     var xyValues = [];
     
     for(let i =0; i<xValues.length; i++){
       var obj = {};
       obj.x = xValues[i];
-      var C = C0*Area/(4*(Math.PI)*time*Math.sqrt(DtR*DLR))*Math.exp(-((xValues[i]-vR*time)**2)/(4*DLR*time)-y**2/(4*DtR*time))*(Math.exp(-(Math.log(2)/lambda*time)));
-      obj.y = expo(C, 4);
+      var C = (C0/2)*(ERFC((xValues[i]-vR*time)/(2*Math.sqrt(DR*time)))-(Math.exp(vR*xValues[i]/DR)*(ERFC((xValues[i]+vR*time)/(2*Math.sqrt(DR*time))))))*(Math.exp(-(Math.log(2)/lambda*time)));
+      obj.y = C.toFixed(2);
       xyValues.push(obj);
-      console.log(obj);
     }
   
   chart1 = new Chart(ctx1,{
@@ -343,7 +329,7 @@ output[7].innerHTML = slider[7].value;
         },
         y:{
           min: 0,
-          max: 20.0,
+          max: 35.0,
           position: 'left',
           title: {
             display: true,
@@ -396,35 +382,30 @@ output[7].innerHTML = slider[7].value;
     chart2.destroy();
 
     //initial conditions (without sorption)
-  var C0 = slider[0].value;
-  var q = slider[1].value;
-  var n = 0.3;
-  v = q/n;
-  var R = slider[6].value;
-  var vR = v/R;
+    var C0 = parseFloat(slider[0].value);
+    var q = parseFloat(slider[1].value);
+    var alpha = 1;
   
-  var Dstar = parseFloat(slider[2].value);
-  var alphaX = 1;
-  var alphaY = 0.1;
-  var DL =  Dstar + (alphaX*v);
-  var Dt = Dstar + (alphaY*v);
-  var DLR = DL/R;
-  var DtR = Dt/R;
-  var x = slider[3].value;
-  var lambda = slider[7].value;
+    var n = 0.35;
+    var v = q / n;
+    var R = parseFloat(slider[4].value);
+    var vR = v / R;
+    var Dstar = parseFloat(slider[2].value);
+    var D = Dstar + (alpha * v);
+    var DR = D / R;
+    var distance = parseFloat(slider[3].value);
+    var lambda = parseFloat(slider[5].value);
   
-  var y = slider[4].value;
-  var Area = slider[5].value;
-  
-  var tValues = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32];
-  
+  const tValues = [1, 5, 10, 20, 30, 40, 50, 60, 70, 80, 100, 120, 140, 160, 180, 200, 240, 280, 320, 360, 440, 520, 600, 680, 840, 1000];
+
   var tyValues = [];
   
-  for(let i =0; i<tValues.length; i++){
+  for (let i = 0; i < tValues.length; i++) {
     var obj = {};
     obj.x = tValues[i];
-    var C = C0*Area/(4*(Math.PI)*tValues[i]*Math.sqrt(DtR*DLR))*Math.exp(-((x-vR*tValues[i])**2)/(4*DLR*tValues[i])-y**2/(4*DtR*tValues[i]))*(Math.exp(-(Math.log(2)/lambda*tValues[i])));
-    obj.y = expo(C, 4);
+    var C2 = (C0 / 2) * (ERFC((distance - vR * tValues[i]) / (2 * Math.sqrt(DR * tValues[i]))) - (Math.exp(vR * distance / DR)) * (ERFC((distance + vR * tValues[i]) / (2 * Math.sqrt(DR * tValues[i]))))) * (Math.exp((-Math.log(2) / lambda) * tValues[i]));
+    obj.y = C2.toFixed(2);
+    console.log(C2);
     tyValues.push(obj);
   }
   
@@ -448,7 +429,7 @@ output[7].innerHTML = slider[7].value;
       scales: {
         x: {
           position: 'bottom',
-          min: 0, max:35,
+          min: 0, max:1000,
           title: {
             display: true,
             text: 'Time (days)',
@@ -459,7 +440,7 @@ output[7].innerHTML = slider[7].value;
         },
         y:{
           min: 0,
-          max: 10.0,
+          max: 35.0,
           position: 'left',
           title: {
             display: true,
@@ -484,7 +465,7 @@ output[7].innerHTML = slider[7].value;
       },
       zoom: {
         limits: {
-          x: {min: 0, max: 35},
+          x: {min: 0, max: 1000},
           y: {min: 0}
         },
         pan: {
@@ -542,18 +523,6 @@ slider[5].oninput = function() {
  mychart();
  mychart2();
 output[5].innerHTML = slider[5].value;
-  }
-
-slider[6].oninput = function() {
- mychart();
- mychart2();
-output[6].innerHTML = slider[6].value;
-  }
-
-slider[7].oninput = function() {
- mychart();
- mychart2();
-output[7].innerHTML = slider[7].value;
   }
             
   // $("#canvas1").load(" #canvas1");
