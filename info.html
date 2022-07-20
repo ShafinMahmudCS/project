@@ -40,7 +40,7 @@
         <div class="collapse navbar-collapse" id="navbarNav">
           <ul class="navbar-nav ms-md-auto gap-2">
             <li class="nav-item rounded">
-              <a class="nav-link active" aria-current="page" href="index.html"
+              <a class="nav-link active" aria-current="page" href="#"
                 ><i class="bi me-2"></i>VISUALIZER</a
               >
             </li>
@@ -48,15 +48,13 @@
               <a class="nav-link" href="#"><i class="bi me-2"></i>INFO</a>
             </li>
             <li class="nav-item rounded">
-              <a class="nav-link" href="about.html"
-                ><i class="bi me-2"></i>ABOUT</a
-              >
+              <a class="nav-link" href="#"><i class="bi me-2"></i>ABOUT</a>
             </li>
           </ul>
         </div>
       </div>
     </nav>
-    <div class="vh-100 mainMargin">
+    <div class="mainMargin">
       <h2 id="header">
         Analytical solutions of the advection-dispersion equation
       </h2>
@@ -65,24 +63,18 @@
         advection-dispersion equation and they are the followings:
       </p>
       <nav class="myNav">
-        <button
-          class="myNavbar"
-          onclick="window.location.href = 'continuousTD.html';"
-        >
-          1D Continuous Injection
-        </button>
-        <button class="myNavbar" onclick="window.location.href = '#';">
-          2D Continuous Injection
-        </button>
-        <button class="myNavbar" onclick="window.location.href = '#';">
-          1D Slug Injection
-        </button>
-        <button
-          class="myNavbar"
-          onclick="window.location.href = 'slugTT.html';"
-        >
-          2D Slug Injection
-        </button>
+        <div class="myNavbar">
+          <a href="slugTT.html" class="dropbtn"> 1D Continuous Injection </a>
+        </div>
+        <div class="myNavbar">
+          <a href="slugTT.html" class="dropbtn"> 2D Continuous Injection</a>
+        </div>
+        <div class="myNavbar">
+          <a href="slugTT.html" class="dropbtn"> 1D Slug Injection </a>
+        </div>
+        <div class="myNavbar">
+          <a href="slugTT.html" class="dropbtn"> 2D Slug Injection </a>
+        </div>
       </nav>
       <p class="text">
         In addition to the analytical solution, user can change values using

@@ -40,7 +40,7 @@
         <div class="collapse navbar-collapse" id="navbarNav">
           <ul class="navbar-nav ms-md-auto gap-2">
             <li class="nav-item rounded">
-              <a class="nav-link active" aria-current="page" href="index.html"
+              <a class="nav-link" aria-current="page" href="index.html"
                 ><i class="bi me-2"></i>VISUALIZER</a
               >
             </li>
@@ -48,7 +48,7 @@
               <a class="nav-link" href="#"><i class="bi me-2"></i>INFO</a>
             </li>
             <li class="nav-item rounded">
-              <a class="nav-link" href="about.html"
+              <a class="nav-link active" href="about.html"
                 ><i class="bi me-2"></i>ABOUT</a
               >
             </li>
@@ -56,47 +56,48 @@
         </div>
       </div>
     </nav>
-    <div class="vh-100 mainMargin">
-      <h2 id="header">
-        Analytical solutions of the advection-dispersion equation
-      </h2>
+    <div class="mainMargin">
+      <h2 id="header">About the Visualizer</h2>
       <p class="text">
-        This visualizer provides four types of analytical solutions to the
-        advection-dispersion equation and they are the followings:
+        These web-based course tools were developed using programming languages
+        such as HTML, CSS, and JavaScript to provide graphical representations
+        of many mechanisms. This tool also allow the user to study the graphs
+        under varying conditions. The main objective of this research is to
+        develop a framework that can be used to teach several fundamental
+        environmental engineering courses and conduct additional research on
+        contaminant transport by analyzing the graphs to design effective
+        mitigation techniques.
       </p>
-      <nav class="myNav">
-        <button
-          class="myNavbar"
-          onclick="window.location.href = 'continuousTD.html';"
-        >
-          1D Continuous Injection
-        </button>
-        <button class="myNavbar" onclick="window.location.href = '#';">
-          2D Continuous Injection
-        </button>
-        <button class="myNavbar" onclick="window.location.href = '#';">
-          1D Slug Injection
-        </button>
-        <button
-          class="myNavbar"
-          onclick="window.location.href = 'slugTT.html';"
-        >
-          2D Slug Injection
-        </button>
-      </nav>
       <p class="text">
-        In addition to the analytical solution, user can change values using
-        slider to study groundwater contamination under various subsurface
-        conditions such as retardation and first-order decay.
+        This work was done under the supervision of Professor Magdalena Krol.
+        Professor Krol is an expert in contaminant hydrogeology with an emphasis
+        on modelling thermal remediation. This work obtained funding from
+        Lassonde School of Engineering through Lassonde Undergraduate Research
+        Award.
       </p>
+
       <div class="container">
-        <img
-          id="contamination"
-          src="https://forloveofwater.org/wp-content/uploads/2018/09/FLOW-Groundwater-Contamination-Infographic.png"
-          alt=""
-        />
+        <img id="visual" src="./images/visual.png" alt="" />
       </div>
+      <p class="text">
+        Thanks to Professor Magdalena Krol for supervising the work on this
+        project and offering assistance throughout the entire process.
+      </p>
+      <h3 id="highlight">Disclaimer</h3>
+      <p class="text">
+        This software is provided "as is", without warranty of any kind, express
+        or implied, including but not limited to accuracy of the proposed
+        results or the completeness of the database. In no event shall the
+        authors or copyright holders be liable for any claim, damages, or other
+        liability, whether in an action of contract, tort or otherwise, arising
+        from, out of or in connection with the software or the use or other
+        dealings in the software.
+      </p>
+      <h3 id="highlight">Contact Information</h3>
+
+      <img id="contact" src="./images/logo.png" alt="" />
     </div>
+
     <footer>
       <p class="text-center p-4 m-0">Copyright © 2022 All Rights Reserved</p>
     </footer>

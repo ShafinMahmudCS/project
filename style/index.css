@@ -1,0 +1,83 @@
+body {
+  font-family: Montserrat, sans-serif;
+  background-color: #f0f0f0;
+}
+
+#header, #highlight{
+  color: #284377;
+  font-weight:600;
+  margin-top: 2%;
+}
+
+footer{
+  background-color: #284377;
+  color:white;
+}
+
+.text{
+  font-size: 19px;
+  margin-top: 2%;
+}
+
+#contact{
+  width:40%;
+}
+
+.navbar{
+  background-color: #284377;
+}
+
+.mainMargin{
+  width: 70%;
+  margin: auto;
+}
+
+#visual{
+  width: 100%;
+}
+.container{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#contamination{
+  width: 70%;
+}
+
+.myNav{
+  display: flex;
+  align-items: center;
+  justify-content:space-evenly;
+  width: 100%;
+  margin-top: 2%;
+}
+
+.myNavbar {
+  overflow: hidden;
+  background-color: #1b3056;
+  color: white;
+  font-size: 18px;
+  width: 25%;
+  padding: 15px;
+  text-align: center;
+}
+
+.myNavbar:nth-of-type(even){
+  background-color: #243e6e;
+}
+
+.myNavbar a {
+  font-size: 18px;
+  color: white;
+  text-decoration: none;
+  text-align: center;
+}
+
+.myNavbar:hover{
+  background-color: #1b3056d2;
+}
+
+
+
+
