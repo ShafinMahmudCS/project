@@ -21,7 +21,6 @@ footer{
 
 #contact{
   width:100%;
-  margin-bottom: 2%;
 }
 
 .navbar{
@@ -29,8 +28,9 @@ footer{
 }
 
 .mainMargin{
-  width: 70%;
+  width: 75%;
   margin: auto;
+  margin-bottom: 2%;
 }
 
 #visual{
@@ -77,6 +77,12 @@ footer{
 
 .myNavbar:hover{
   background-color: #1b3056d2;
+}
+
+@media screen and (max-width: 1220px){
+  .mainMargin{
+    width:100%;
+  }
 }
 
 
