@@ -9,6 +9,10 @@ body {
   margin-top: 2%;
 }
 
+.navbar-brand{
+  font-weight:500;
+}
+
 footer{
   background-color: #284377;
   color:white;
@@ -81,7 +85,7 @@ footer{
 
 @media screen and (max-width: 1220px){
   .mainMargin{
-    width:100%;
+    width:95%;
   }
 }
 

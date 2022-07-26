@@ -1,3 +1,10 @@
+//preloader
+var loader = setInterval(function () {
+  if(document.readyState !== "complete") return;
+  clearInterval(loader);
+  document.querySelector('.spinner-wrapper').style.display = "none";
+}, 250);
+
 function ERFC(value1){
   return 1-math.erf(value1);
 }
