@@ -212,9 +212,18 @@ color:#284377;
   width: 100%;
 }
 
+.canvasSideContinuous{
+  width: 80%;
+}
+
 .btn button{
   background-color: #1b3056;
   color: white;
+}
+
+.diffContainer{
+  width:95%;
+  font-size: 13.5px;
 }
 
 .container{
@@ -285,6 +294,14 @@ color:#284377;
 
 .dropdown:hover .dropdown-content {
   display: block;
+}
+
+.slidecontainer1D{
+  width: 96%;
+  padding-left: 2%;
+  padding-right: 2%;
+  margin-bottom: -0.5%;
+  margin-top:-0.5% ;
 }
 
 .slidecontainer, .slidecontainer1, .slidecontainer2, .slidecontainer3, .slidecontainer4, .slidecontainer5, .slidecontainer6, .slidecontainer7, .slidecontainer8 {

@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="./style/visualStyle.css"
+      title="style"
+    />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+    <script src="https://unpkg.com/mathjs/lib/browser/math.js"></script>
+    <title>My Chart</title>
+  </head>
+  <body>
+    <!-- preloader -->
+    <div class="spinner-wrapper">
+      <div class="sk-chase">
+        <div class="sk-chase-dot"></div>
+        <div class="sk-chase-dot"></div>
+        <div class="sk-chase-dot"></div>
+        <div class="sk-chase-dot"></div>
+        <div class="sk-chase-dot"></div>
+        <div class="sk-chase-dot"></div>
+      </div>
+    </div>
+
+    <div id="top">
+      <a id="header" href="index.html"
+        ><h1>Contaminant Transport Visualizer</h1></a
+      >
+    </div>
+
+    <h2>2D Continuous Injection</h2>
+
+    <p>
+      <b>Constant Conditions:</b> <b>Effective porosity (n<sub>e</sub>)</b> =
+      0.35, <b>Dispersivity (&alpha;)</b> = 1 m
+    </p>
+
+    <div class="container">
+      <div class="slidecontainer">
+        <input
+          type="range"
+          min="0"
+          max="30"
+          value="25"
+          class="slider"
+          id="myRange"
+        />
+
+        <p>Concentration (c) : <span class="demo"></span> mg/L</p>
+      </div>
+
+      <div class="slidecontainer2">
+        <input
+          type="range"
+          min="0.00000"
+          max="0.50000"
+          step="0.00001"
+          value="0.20000"
+          class="slider"
+          id="myRange"
+        />
+
+        <p>Darcy velocity (q): <span class="demo"></span></p>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="slidecontainer3">
+        <input
+          type="range"
+          min="0.0000000000"
+          max="1.0000000000"
+          value="0.0000000001"
+          step="0.0000000001"
+          class="slider"
+          id="myRange"
+        />
+
+        <p>
+          Effective diffusion coefficient (D*):
+          <span class="demo"></span> m<sup>2</sup>/day
+        </p>
+      </div>
+
+      <div class="slidecontainer4">
+        <input
+          type="range"
+          min="0"
+          max="500"
+          step="10"
+          value="80"
+          class="slider"
+          id="myRange"
+        />
+
+        <p>
+          <span class="blue">Time (t):</span> <span class="demo"></span> day
+          (s)/
+          <span class="pink">Distance (x):</span>
+          <span class="myTime"></span> m
+        </p>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="slidecontainer7">
+        <input
+          type="range"
+          min="1.00000"
+          max="10.00000"
+          value="1.00000"
+          step="0.00001"
+          class="slider"
+          id="myRange"
+        />
+
+        <p>Retardation factor (R) : <span class="demo"></span></p>
+      </div>
+
+      <div class="slidecontainer8">
+        <input
+          type="range"
+          min="0"
+          max="15000"
+          value="90"
+          class="slider"
+          id="myRange"
+        />
+
+        <p>Half-life (&lambda;): <span class="demo"></span> day(s)</p>
+      </div>
+    </div>
+
+    <div class="canvasSideContinuous">
+      <div class="myCanvas">
+        <canvas id="canvas1"></canvas>
+      </div>
+
+      <!-- <div class="myCanvas">
+        <canvas id="canvas2"></canvas>
+      </div> -->
+    </div>
+
+    <div class="mybtn">
+      <!-- <div class="left">
+        <button class="btn" onclick="toggleZoom1()">toggle Zoom</button>
+      </div> -->
+      <div class="right">
+        <button class="btn" onclick="toggleZoom2()">toggle Zoom</button>
+      </div>
+    </div>
+
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.8.0/chart.min.js"
+      integrity="sha512-sW/w8s4RWTdFFSduOTGtk4isV1+190E/GghVffMA9XczdJ2MDzSzLEubKAs5h0wzgSJOQTRYyaz73L3d6RtJSg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/hammer.js/2.0.8/hammer.min.js"
+      integrity="sha512-UXumZrZNiOwnTcZSHLOfcTs0aos2MzBWHXOHOuB0J/R44QB0dwY5JgfbvljXcklVf65Gc4El6RjZ+lnwd2az2g=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-zoom/1.2.1/chartjs-plugin-zoom.min.js"
+      integrity="sha512-klQv6lz2YR+MecyFYMFRuU2eAl8IPRo6zHnsc9n142TJuJHS8CG0ix4Oq9na9ceeg1u5EkBfZsFcV3U7J51iew=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <script src="bessel.js"></script>
+    <script src="./script/continuous2D.js"></script>
+  </body>
+</html>

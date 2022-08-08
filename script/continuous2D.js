@@ -36,134 +36,140 @@ function toggleZoom2(){
 
 
 
-var C0 = 25;
+// var C0 = 25;
 
-var q = 0.2;
+// var q = 0.2;
 
+// var n = 0.35;
+// var v = q / n;
+// var R = 1;
+// var vR = v / R;
+// var alpha = 1;
+
+// var Dstar = 0.0000000001;
+// var D = Dstar + (alpha * v);
+
+// var DR = D / R;
+
+// var distance = 80;
+
+// var lambda = 90;
+
+// var ctx2 = document.getElementById("canvas2");
+
+// const tValues = [1, 5, 10, 20, 30, 40, 50, 60, 70, 80, 100, 120, 140, 160, 180, 200, 240, 280, 320, 360, 440, 520, 600, 680, 840, 1000];
+
+// var tyValues = [];
+
+// for (let i = 0; i < tValues.length; i++) {
+//   var obj = {};
+//   obj.x = tValues[i];
+//   var C2 = (C0 / 2) * (ERFC((distance - vR * tValues[i]) / (2 * Math.sqrt(DR * tValues[i]))) - (Math.exp(vR * distance / DR)) * (ERFC((distance + vR * tValues[i]) / (2 * Math.sqrt(DR * tValues[i]))))) * (Math.exp((-Math.log(2) / lambda) * tValues[i]));
+//   obj.y = C2.toFixed(2);
+//   console.log(C2);
+//   tyValues.push(obj);
+// }
+
+// var chart2 = new Chart(ctx2,{
+//   type: 'scatter',
+//   data: {
+//     datasets: [{
+//       backgroundColor: 'rgb(255, 99, 132)',
+//       borderColor:'rgb(255, 99, 132)',
+//       borderWidth:1.2,
+//       pointRadius:2.5,
+//       pointBackgroundColor: 'rgb(255, 99, 132)',
+//       data: tyValues,
+//       fill: false,
+//       showLine: true,
+//       tension:0.4
+//     }]
+//   },
+//   options: {
+//     animation: false,
+//     scales: {
+//       x: {
+//         position: 'bottom',
+//         min: 0, max:1000,
+//         title: {
+//           display: true,
+//           text: 'Time (days)',
+//           font: {
+//             size: 15
+//         }
+//       }
+//       },
+//       y:{
+//         min: 0,
+//         max: 35.0,
+//         position: 'left',
+//         title: {
+//           display: true,
+//           text: 'Concentration (mg/L)',
+//           font: {
+//             size: 15
+//         }
+//       }
+//     }
+//   },
+//   responsive: true,
+//     plugins: {
+//       title: {
+//           display: true,
+//           text: 'Concentration with Time',
+//           font: {
+//             size: 17
+//         }
+//       },
+//       legend: {
+//         display: false
+//     },
+//     zoom: {
+//       limits: {
+//         x: {min: 0, max: 1000},
+//         y: {min: 0}
+//       },
+//       pan: {
+//         enabled: true,
+//         mode: 'y',
+//       },
+//       zoom: {
+//         wheel: {
+//           enabled: myZoom2,
+//           speed:0.05
+//         },
+//         pinch: {
+//           enabled: false
+//         },
+//         mode: 'y',
+//       }
+//     }
+//   }
+// }});
+
+var Q = 3.66;
+
+var b = 1.75;
+
+var c = 133
+var Area = 20;
 var n = 0.35;
-var v = q / n;
-var R = 1;
-var vR = v / R;
-var alpha = 1;
-
+var q = Q/Area;
+var v = 0.187;
 var Dstar = 0.0000000001;
-var D = Dstar + (alpha * v);
-
-var DR = D / R;
-
-var distance = 80;
-
-var lambda = 90;
-
-var ctx2 = document.getElementById("canvas2");
-
-const tValues = [1, 5, 10, 20, 30, 40, 50, 60, 70, 80, 100, 120, 140, 160, 180, 200, 240, 280, 320, 360, 440, 520, 600, 680, 840, 1000];
-
-var tyValues = [];
-
-for (let i = 0; i < tValues.length; i++) {
-  var obj = {};
-  obj.x = tValues[i];
-  var C2 = (C0 / 2) * (ERFC((distance - vR * tValues[i]) / (2 * Math.sqrt(DR * tValues[i]))) - (Math.exp(vR * distance / DR)) * (ERFC((distance + vR * tValues[i]) / (2 * Math.sqrt(DR * tValues[i]))))) * (Math.exp((-Math.log(2) / lambda) * tValues[i]));
-  obj.y = C2.toFixed(2);
-  console.log(C2);
-  tyValues.push(obj);
-}
-
-var chart2 = new Chart(ctx2,{
-  type: 'scatter',
-  data: {
-    datasets: [{
-      backgroundColor: 'rgb(255, 99, 132)',
-      borderColor:'rgb(255, 99, 132)',
-      borderWidth:1.2,
-      pointRadius:2.5,
-      pointBackgroundColor: 'rgb(255, 99, 132)',
-      data: tyValues,
-      fill: false,
-      showLine: true,
-      tension:0.4
-    }]
-  },
-  options: {
-    animation: false,
-    scales: {
-      x: {
-        position: 'bottom',
-        min: 0, max:1000,
-        title: {
-          display: true,
-          text: 'Time (days)',
-          font: {
-            size: 15
-        }
-      }
-      },
-      y:{
-        min: 0,
-        max: 35.0,
-        position: 'left',
-        title: {
-          display: true,
-          text: 'Concentration (mg/L)',
-          font: {
-            size: 15
-        }
-      }
-    }
-  },
-  responsive: true,
-    plugins: {
-      title: {
-          display: true,
-          text: 'Concentration with Time',
-          font: {
-            size: 17
-        }
-      },
-      legend: {
-        display: false
-    },
-    zoom: {
-      limits: {
-        x: {min: 0, max: 1000},
-        y: {min: 0}
-      },
-      pan: {
-        enabled: true,
-        mode: 'y',
-      },
-      zoom: {
-        wheel: {
-          enabled: myZoom2,
-          speed:0.05
-        },
-        pinch: {
-          enabled: false
-        },
-        mode: 'y',
-      }
-    }
-  }
-}});
-
-var C0 = 25;
-
-var q = 0.2;
-
-var n = 0.35;
-var v = q/n;
+var alphaX = 4.919;
+var alphaY = 0.4919;
+var DL = (alphaX*v) + Dstar;
+var DT = (alphaY*v) + Dstar
 var R = 1;
+var DLR = DL/R;
+var DTR = DT/R;
 var vR = v/R;
-var alpha = 1;
 
-var Dstar = 0.0000000001;
-var D =  Dstar + (alpha*v);
-
-var DR = D/R;
-
-var lambda = 90;
-var time = 80;
+var lambda = 10000;
+var y = 16;
+var x = 123;
+var time = 10;
 
 var ctx1 = document.getElementById("canvas1").getContext("2d");
 
@@ -171,11 +177,14 @@ var ctx1 = document.getElementById("canvas1").getContext("2d");
 
   var xyValues = [];
 
-  console.log(Math.exp(-Math.log10(2)/lambda*time));
   for(let i =0; i<xValues.length; i++){
     var obj = {};
     obj.x = xValues[i];
-    var C = (C0/2)*(ERFC((xValues[i]-vR*time)/(2*Math.sqrt(DR*time)))-(Math.exp(vR*xValues[i]/DR)*(ERFC((xValues[i]+vR*time)/(2*Math.sqrt(DR*time))))))*(Math.exp(-(Math.log(2)/lambda*time)));
+    var a1 = Q*c/b/(2*Math.PI*(DTR*DLR)**0.5)*Math.exp(vR*xValues[i]/(2*DLR));
+    console.log(a1);
+    var a2 = ((vR**2)/(4*DLR)*(((xValues[i]**2)/DLR)+(y**2)/DTR))**0.5;
+    console.log(a2);
+    var C = xValues[i]*Math.exp(-Math.log(2)/y*time);
     obj.y = C.toFixed(2);
     xyValues.push(obj);
   }
