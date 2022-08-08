@@ -14,9 +14,14 @@
       href="./style/visualStyle.css"
       title="style"
     />
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
     <script src="https://unpkg.com/mathjs/lib/browser/math.js"></script>
+    <!--Copyright (C) 2013-present   SheetJS LLC-->
+    <script src="./script/bessel.js"></script>
+    <script src="https://cdn.rawgit.com/SheetJS/printj/master/printj.js"></script>
+
     <title>My Chart</title>
   </head>
   <body>
@@ -50,8 +55,8 @@
         <input
           type="range"
           min="0"
-          max="30"
-          value="25"
+          max="200"
+          value="133"
           class="slider"
           id="myRange"
         />
@@ -180,7 +185,7 @@
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
     ></script>
-    <script src="bessel.js"></script>
+
     <script src="./script/continuous2D.js"></script>
   </body>
 </html>

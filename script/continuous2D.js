@@ -178,13 +178,16 @@ var ctx1 = document.getElementById("canvas1").getContext("2d");
   var xyValues = [];
 
   for(let i =0; i<xValues.length; i++){
+
     var obj = {};
     obj.x = xValues[i];
     var a1 = Q*c/b/(2*Math.PI*(DTR*DLR)**0.5)*Math.exp(vR*xValues[i]/(2*DLR));
-    console.log(a1);
+    console.log("a1 =" + a1);
     var a2 = ((vR**2)/(4*DLR)*(((xValues[i]**2)/DLR)+(y**2)/DTR))**0.5;
-    console.log(a2);
-    var C = xValues[i]*Math.exp(-Math.log(2)/y*time);
+    console.log("a2 =" + a2);
+    console.log(Math.exp((-Math.log(2)/lambda)*time));
+    var C = a1*BESSEL.besselk(a2,0)*Math.exp((-Math.log(2)/lambda)*time);
+    console.log(C);
     obj.y = C.toFixed(2);
     xyValues.push(obj);
   }
