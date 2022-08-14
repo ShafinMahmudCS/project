@@ -25,7 +25,9 @@
     <!-- partial:index.partial.html -->
     <nav class="navbar navbar-expand-lg navbar-dark">
       <div class="container-fluid">
-        <a class="navbar-brand" href="#">Contaminant Transport Visualizer</a>
+        <a class="navbar-brand" href="#"
+          >Subsurface Transport Visualization Tool</a
+        >
         <button
           class="navbar-toggler"
           type="button"
@@ -59,63 +61,91 @@
       </div>
     </nav>
     <div class="mainMargin">
-      <h2 id="header">How to Use the Visualizer</h2>
+      <h2 id="header">How to Use the Visualization Tool</h2>
       <p class="text">
-        This website contains many visualizers to provide graphical
-        representation of mechanisms. By the help of slider, values can be
-        changed to study groundwater contamination under various subsurface
-        conditions such as retardation and first-order decay.
+        This web-based tool uses analytical solutions to the Advection
+        Dispersion (AD) equation for different scenarios and to graphically
+        represent the various transport mechanisms. Certain values can be
+        changed to study their effect on contaminant transport in groundwater
+        including darcy velocity, diffusion coefficient, contaminant retardation
+        and first-order decay parameter. The AD and the analytical solutions
+        used are given below.
       </p>
+      <h3 id="highlight">Advection Dispersion Equation:</h3>
+
+      <div class="container">
+        <img src="images/AD.png" alt="" />
+      </div>
+
+      <h3 id="highlight">Analytical Solutions under Various Assumptions:</h3>
+
+      <div class="container">
+        <img id="visual" src="images/Asol.png" alt="" />
+      </div>
 
       <h3 id="highlight">Parameters</h3>
       <p class="text">
-        <b>Effective porosity (n<sub>e</sub>):</b> The porosity through which
-        flow can occur. Noninterconnected and dead-end pores are not included in
-        the effective porosity.
+        <b>Effective porosity (n<sub>e</sub>):</b> Porosity is the ratio of the
+        volume of voids to the total volume of soil. Effective porosity is the
+        porosity through which flow can occur (i.e. the pores have to be
+        connected). Unconnected and dead-end pores are not included in the
+        effective porosity [-].
       </p>
       <p class="text">
-        <b>Longitudinal dispersivity (&alpha;<sub>x</sub>):</b> The mixing that
-        occurs along the direction of the flowpath because of invading
-        solute-containing water which does not travel at the same velocity.
+        <b>Longitudinal dispersivity (&alpha;<sub>x</sub>):</b> Assuming that
+        mechanical dispersion is linearly dependent on average porewater
+        velocity, longitudinal dispersity is defined as the ratio of
+        longitudinal dispersion coefficient (dispersion in the direction of
+        flow) to the average porewater velocity [L]. It represents the local
+        variations in the groundwater velocity in the direction of flow.
       </p>
       <p class="text">
-        <b>Transverse dispersivity (&alpha;<sub>y</sub>):</b> The mixing that
-        occurs normal to the direction of the flowpath because of invading
-        solute-containing water that does not travel at the same velocity
+        <b>Transverse dispersivity (&alpha;<sub>y</sub>):</b> This is the ratio
+        of transverse dispersion coefficient (dispersion normal to flow
+        direction) to the average porewater velocity [L]
       </p>
       <p class="text">
-        <b>Concentration(c):</b> The amount of a substance present in a defined
-        space.
+        <b>Concentration(c):</b> The amount of solute (in moles or mass) per
+        unit volume [M/L<sup>3</sup>]
       </p>
       <p class="text">
-        <b>Darcy velocity (q):</b> The volume of flow through a unit of
-        cross-sectional area
+        <b>Darcy velocity (q):</b> The flow of fluid (here water) per unit
+        cross-sectional area of soil [L/T].
       </p>
       <p class="text">
-        <b>Pore water velocity(v):</b> The rate at which the flux of water
-        across the unit cross-sectional area of pore space occurs.
+        <b>Pore water (seepage) velocity(v):</b> The flow of water across the
+        unit cross-sectional area of pore space, [L/T] v = q/n<sub>e</sub>.
       </p>
       <p class="text">
-        <b>Effective diffusion coefficient (D*):</b> Effective diffusion
-        coefficient is based on the average cross-sectional area open to
-        diffusion and the distance traveled by molecules in porous media.
+        <b>Effective diffusion coefficient (D*):</b> Diffusion in porous media
+        is slower than in water because the ions must take longer paths as they
+        travel around mineral grains. In order to account for the impact of
+        longer pathways, an effective diffusion coefficient is used, which is
+        less than the diffusion coefficient in water [L<sup>2</sup>/T].
       </p>
-      <p class="text"><b>Time (t):</b> Measure the time taken by a process.</p>
       <p class="text">
-        <b>Distance (x):</b> An amount of space between two things.
+        <b>Time (t):</b> Measure the time taken by a process [T].
       </p>
-      <p class="text"><b>y:</b> The y-axis</p>
       <p class="text">
-        <b>Area (a):</b> The region bounded by the shape of an object
+        <b>Distance (x):</b> The distance from coordinates in the direction of
+        the x-axis [L].
+      </p>
+      <p class="text">
+        <b>Distance (y): </b> The distance from coordinates in the direction of
+        the y-axis [L].
+      </p>
+      <p class="text">
+        <b>Area (a):</b> The cross-section through which groundwater is passing
+        [L<sup>2</sup>]
       </p>
       <p class="text">
         <b>Retardation factor (R):</b> Due to sorption processes, some solutes
-        will move much more slowly through the aquifer than the ground water
-        that is transporting them; this effect is called retardation
+        will move much more slowly through the aquifer than the groundwater that
+        is transporting them; this effect is called retardation [-]
       </p>
       <p class="text">
-        <b>Half-life (&lambda;):</b> The time required for a quantity to reduce
-        to half of its initial value.
+        <b>Half-life (&lambda;):</b> The time required for a substance to reduce
+        to half its initial amount [T].
       </p>
     </div>
     <footer>

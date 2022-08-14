@@ -213,7 +213,7 @@ color:#284377;
 }
 
 .canvasSideContinuous{
-  width: 60%;
+  width: 42%;
 }
 
 .btn button{
@@ -308,8 +308,6 @@ color:#284377;
     width: 50%;
     padding-left: 2%;
     padding-right: 2%;
-    margin-bottom: -0.5%;
-    margin-top:-0.5% ;
   }
   
   .slider {

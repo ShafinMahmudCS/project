@@ -34,7 +34,7 @@
 
     <div id="top">
       <a id="header" href="index.html"
-        ><h1>Contaminant Transport Visualizer</h1></a
+        ><h1>Subsurface Transport Visualization Tool</h1></a
       >
     </div>
 
@@ -47,6 +47,8 @@
 
     <div class="container">
       <div class="slidecontainer">
+        <p>Concentration (c) : <span class="demo"></span> mg/L</p>
+
         <input
           type="range"
           min="0"
@@ -55,11 +57,11 @@
           class="slider"
           id="myRange"
         />
-
-        <p>Concentration (c) : <span class="demo"></span> mg/L</p>
       </div>
 
       <div class="slidecontainer2">
+        <p>Darcy velocity (q): <span class="demo"></span></p>
+
         <input
           type="range"
           min="0.00000"
@@ -69,13 +71,16 @@
           class="slider"
           id="myRange"
         />
-
-        <p>Darcy velocity (q): <span class="demo"></span></p>
       </div>
     </div>
 
     <div class="container">
       <div class="slidecontainer3">
+        <p>
+          Effective diffusion coefficient (D*):
+          <span class="demo"></span> m<sup>2</sup>/day
+        </p>
+
         <input
           type="range"
           min="0.0000000000"
@@ -85,14 +90,16 @@
           class="slider"
           id="myRange"
         />
-
-        <p>
-          Effective diffusion coefficient (D*):
-          <span class="demo"></span> m<sup>2</sup>/day
-        </p>
       </div>
 
       <div class="slidecontainer4">
+        <p>
+          <span class="blue">Time (t):</span> <span class="demo"></span> day
+          (s)/
+          <span class="pink">Distance (x):</span>
+          <span class="myTime"></span> m
+        </p>
+
         <input
           type="range"
           min="0"
@@ -102,18 +109,13 @@
           class="slider"
           id="myRange"
         />
-
-        <p>
-          <span class="blue">Time (t):</span> <span class="demo"></span> day
-          (s)/
-          <span class="pink">Distance (x):</span>
-          <span class="myTime"></span> m
-        </p>
       </div>
     </div>
 
     <div class="container">
       <div class="slidecontainer7">
+        <p>Retardation factor (R) : <span class="demo"></span></p>
+
         <input
           type="range"
           min="1.00000"
@@ -123,11 +125,11 @@
           class="slider"
           id="myRange"
         />
-
-        <p>Retardation factor (R) : <span class="demo"></span></p>
       </div>
 
       <div class="slidecontainer8">
+        <p>Half-life (&lambda;): <span class="demo"></span> day(s)</p>
+
         <input
           type="range"
           min="0"
@@ -136,8 +138,6 @@
           class="slider"
           id="myRange"
         />
-
-        <p>Half-life (&lambda;): <span class="demo"></span> day(s)</p>
       </div>
     </div>
 

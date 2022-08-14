@@ -31,7 +31,7 @@ function toggleZoom2(){
   }else{
   myZoom2 = true;
   }
-  mychart2();
+  // mychart2();
 }
 
 
@@ -147,29 +147,29 @@ function toggleZoom2(){
 //   }
 // }});
 
-var Q = 3.66;
+var Q = 3.66; 
 
-var b = 1.75;
+var b = 1.75; 
 
-var c = 133
-var Area = 20;
+var c = 133; 
+var Area = 20; // area constant cause area not in equation
 var n = 0.35;
-var q = Q/Area;
-var v = 0.187;
-var Dstar = 0.0000000001;
+var q = Q/Area; //can't make this a variable cause if I make this a variable and keep area constant, whenever I change q it means the Q was changed which is there in the main equation so result won't be accurate.
+var v = q/n;
+var Dstar = 0.0000000001; 
 var alphaX = 4.919;
 var alphaY = 0.4919;
 var DL = (alphaX*v) + Dstar;
 var DT = (alphaY*v) + Dstar
-var R = 1;
+var R = 1; 
 var DLR = DL/R;
 var DTR = DT/R;
 var vR = v/R;
 
-var lambda = 10000;
-var y = 16;
+var lambda = 10000; 
+var y = 16; 
 var x = 123;
-var time = 10;
+var time = 10; 
 
 var ctx1 = document.getElementById("canvas1").getContext("2d");
 
@@ -224,7 +224,7 @@ var chart1 = new Chart(ctx1,{
       },
       y:{
         min: 0,
-        max: 35.0,
+        max: 100.0,
         position: 'left',
         title: {
           display: true,
@@ -278,44 +278,64 @@ var str;
 
 var slider = document.querySelectorAll(".slider");
 var output = document.querySelectorAll(".demo");
-var myTime = document.querySelector(".myTime");
+var flow = document.querySelector(".flow");
 
 output[0].innerHTML = slider[0].value;
-output[1].innerHTML = slider[1].value + " m/day, Pore water velocity (v) : " + v.toFixed(2) + " m/day";
+output[1].innerHTML = slider[1].value;
+flow.innerHTML = "Darcy velocity (q): " + q.toFixed(2) + " m/day, Pore water velocity (v) : " + v.toFixed(2) + " m/day";
 output[2].innerHTML = slider[2].value;
 output[3].innerHTML = slider[3].value;
-myTime.innerHTML = slider[3].value;
 output[4].innerHTML = slider[4].value;
 output[5].innerHTML = slider[5].value;
+output[6].innerHTML = slider[6].value;
+output[7].innerHTML = slider[7].value;
   //function slider
 
   function mychart(){
     let pos = $(document).scrollTop();
     chart1.destroy();
-
+    
     //initial conditions (without sorption)
-    var C0 = parseFloat(slider[0].value);
-    var q = parseFloat(slider[1].value);
-    var alpha = 1;
-  
+    var Area = 20; // area constant cause area not in equation
     var n = 0.35;
-    v = q / n;
-    var R = parseFloat(slider[4].value);
-    var vR = v / R;
-    var Dstar = parseFloat(slider[2].value);
-    var D = Dstar + (alpha * v);
-    var DR = D / R;
-    var time = parseFloat(slider[3].value);
-    var lambda = parseFloat(slider[5].value);
+
+    var alphaX = 4.919;
+    var alphaY = 0.4919;
+
+    var c = parseFloat(slider[0].value);
+    var Q = parseFloat(slider[1].value);
+    var Dstar = parseFloat(slider[2].value);  
+    var b = parseFloat(slider[3].value); 
+    var y = parseFloat(slider[4].value); 
+    var time = parseFloat(slider[5].value); 
+    var R = parseFloat(slider[6].value);
+    var lambda = parseFloat(slider[7].value);  
+
+    q = Q/Area; //can't make this a variable cause if I make this a variable and keep area constant, whenever I change q it means the Q was changed which is there in the main equation so result won't be accurate.
+    v = q/n;
+    var DL = (alphaX*v) + Dstar;
+    var DT = (alphaY*v) + Dstar;
+    var DLR = DL/R;
+    var DTR = DT/R;
+    var vR = v/R;
+    
+
     
     const xValues = [0, 5, 10, 15, 20, 30, 40, 50, 60, 70, 80, 100, 120, 140, 160, 180, 200, 220, 240, 260, 280, 300, 320, 340, 360, 380, 420, 460, 500];
-    
+
     var xyValues = [];
-    
+  
     for(let i =0; i<xValues.length; i++){
+  
       var obj = {};
       obj.x = xValues[i];
-      var C = (C0/2)*(ERFC((xValues[i]-vR*time)/(2*Math.sqrt(DR*time)))-(Math.exp(vR*xValues[i]/DR)*(ERFC((xValues[i]+vR*time)/(2*Math.sqrt(DR*time))))))*(Math.exp(-(Math.log(2)/lambda*time)));
+      var a1 = Q*c/b/(2*Math.PI*(DTR*DLR)**0.5)*Math.exp(vR*xValues[i]/(2*DLR));
+      console.log("a1 =" + a1);
+      var a2 = ((vR**2)/(4*DLR)*(((xValues[i]**2)/DLR)+(y**2)/DTR))**0.5;
+      console.log("a2 =" + a2);
+      console.log(Math.exp((-Math.log(2)/lambda)*time));
+      var C = a1*BESSEL.besselk(a2,0)*Math.exp((-Math.log(2)/lambda)*time);
+      console.log(C);
       obj.y = C.toFixed(2);
       xyValues.push(obj);
     }
@@ -351,7 +371,7 @@ output[5].innerHTML = slider[5].value;
         },
         y:{
           min: 0,
-          max: 35.0,
+          max: 100.0,
           position: 'left',
           title: {
             display: true,
@@ -399,152 +419,165 @@ output[5].innerHTML = slider[5].value;
   $(document).scrollTop(pos);
   }
 
-  function mychart2(){
-    let pos = $(document).scrollTop();
-    chart2.destroy();
+  // function mychart2(){
+  //   let pos = $(document).scrollTop();
+  //   chart2.destroy();
 
-    //initial conditions (without sorption)
-    var C0 = parseFloat(slider[0].value);
-    var q = parseFloat(slider[1].value);
-    var alpha = 1;
+  //   //initial conditions (without sorption)
+  //   var C0 = parseFloat(slider[0].value);
+  //   var q = parseFloat(slider[1].value);
+  //   var alpha = 1;
   
-    var n = 0.35;
-    var v = q / n;
-    var R = parseFloat(slider[4].value);
-    var vR = v / R;
-    var Dstar = parseFloat(slider[2].value);
-    var D = Dstar + (alpha * v);
-    var DR = D / R;
-    var distance = parseFloat(slider[3].value);
-    var lambda = parseFloat(slider[5].value);
+  //   var n = 0.35;
+  //   var v = q / n;
+  //   var R = parseFloat(slider[4].value);
+  //   var vR = v / R;
+  //   var Dstar = parseFloat(slider[2].value);
+  //   var D = Dstar + (alpha * v);
+  //   var DR = D / R;
+  //   var distance = parseFloat(slider[3].value);
+  //   var lambda = parseFloat(slider[5].value);
   
-  const tValues = [1, 5, 10, 20, 30, 40, 50, 60, 70, 80, 100, 120, 140, 160, 180, 200, 240, 280, 320, 360, 440, 520, 600, 680, 840, 1000];
+  // const tValues = [1, 5, 10, 20, 30, 40, 50, 60, 70, 80, 100, 120, 140, 160, 180, 200, 240, 280, 320, 360, 440, 520, 600, 680, 840, 1000];
 
-  var tyValues = [];
+  // var tyValues = [];
   
-  for (let i = 0; i < tValues.length; i++) {
-    var obj = {};
-    obj.x = tValues[i];
-    var C2 = (C0 / 2) * (ERFC((distance - vR * tValues[i]) / (2 * Math.sqrt(DR * tValues[i]))) - (Math.exp(vR * distance / DR)) * (ERFC((distance + vR * tValues[i]) / (2 * Math.sqrt(DR * tValues[i]))))) * (Math.exp((-Math.log(2) / lambda) * tValues[i]));
-    obj.y = C2.toFixed(2);
-    console.log(C2);
-    tyValues.push(obj);
-  }
+  // for (let i = 0; i < tValues.length; i++) {
+  //   var obj = {};
+  //   obj.x = tValues[i];
+  //   var C2 = (C0 / 2) * (ERFC((distance - vR * tValues[i]) / (2 * Math.sqrt(DR * tValues[i]))) - (Math.exp(vR * distance / DR)) * (ERFC((distance + vR * tValues[i]) / (2 * Math.sqrt(DR * tValues[i]))))) * (Math.exp((-Math.log(2) / lambda) * tValues[i]));
+  //   obj.y = C2.toFixed(2);
+  //   console.log(C2);
+  //   tyValues.push(obj);
+  // }
   
-  chart2 = new Chart(ctx2,{
-    type: 'scatter',
-    data: {
-      datasets: [{
-        backgroundColor: 'rgb(255, 99, 132)',
-        borderColor:'rgb(255, 99, 132)',
-        borderWidth:1.2,
-        pointRadius:2.5,
-        pointBackgroundColor: 'rgb(255, 99, 132)',
-        data: tyValues,
-        fill: false,
-        showLine: true,
-        tension:0.4
-      }]
-    },
-    options: {
-      animation: false,
-      scales: {
-        x: {
-          position: 'bottom',
-          min: 0, max:1000,
-          title: {
-            display: true,
-            text: 'Time (days)',
-            font: {
-              size: 15
-          }
-        }
-        },
-        y:{
-          min: 0,
-          max: 35.0,
-          position: 'left',
-          title: {
-            display: true,
-            text: 'Concentration (mg/L)',
-            font: {
-              size: 15
-          }
-        }
-      }
-    },
-    responsive: true,
-      plugins: {
-        title: {
-            display: true,
-            text: 'Concentration with Time',
-            font: {
-              size: 17
-          }
-        },
-        legend: {
-          display: false
-      },
-      zoom: {
-        limits: {
-          x: {min: 0, max: 1000},
-          y: {min: 0}
-        },
-        pan: {
-          enabled: true,
-          mode: 'y',
-        },
-        zoom: {
-          wheel: {
-            enabled: myZoom2,
-            speed:0.05
-          },
-          pinch: {
-            enabled: false
-          },
-          mode: 'y',
-        }
-      }
-    }
-  }});
-  $(document).scrollTop(pos);
-  }
+  // chart2 = new Chart(ctx2,{
+  //   type: 'scatter',
+  //   data: {
+  //     datasets: [{
+  //       backgroundColor: 'rgb(255, 99, 132)',
+  //       borderColor:'rgb(255, 99, 132)',
+  //       borderWidth:1.2,
+  //       pointRadius:2.5,
+  //       pointBackgroundColor: 'rgb(255, 99, 132)',
+  //       data: tyValues,
+  //       fill: false,
+  //       showLine: true,
+  //       tension:0.4
+  //     }]
+  //   },
+  //   options: {
+  //     animation: false,
+  //     scales: {
+  //       x: {
+  //         position: 'bottom',
+  //         min: 0, max:1000,
+  //         title: {
+  //           display: true,
+  //           text: 'Time (days)',
+  //           font: {
+  //             size: 15
+  //         }
+  //       }
+  //       },
+  //       y:{
+  //         min: 0,
+  //         max: 35.0,
+  //         position: 'left',
+  //         title: {
+  //           display: true,
+  //           text: 'Concentration (mg/L)',
+  //           font: {
+  //             size: 15
+  //         }
+  //       }
+  //     }
+  //   },
+  //   responsive: true,
+  //     plugins: {
+  //       title: {
+  //           display: true,
+  //           text: 'Concentration with Time',
+  //           font: {
+  //             size: 17
+  //         }
+  //       },
+  //       legend: {
+  //         display: false
+  //     },
+  //     zoom: {
+  //       limits: {
+  //         x: {min: 0, max: 1000},
+  //         y: {min: 0}
+  //       },
+  //       pan: {
+  //         enabled: true,
+  //         mode: 'y',
+  //       },
+  //       zoom: {
+  //         wheel: {
+  //           enabled: myZoom2,
+  //           speed:0.05
+  //         },
+  //         pinch: {
+  //           enabled: false
+  //         },
+  //         mode: 'y',
+  //       }
+  //     }
+  //   }
+  // }});
+  // $(document).scrollTop(pos);
+  // }
 
 slider[0].oninput = function() {
  mychart();
- mychart2();
+//  mychart2();
 output[0].innerHTML = slider[0].value;
   }
 
 slider[1].oninput = function() {
  mychart();
- mychart2();
-output[1].innerHTML = slider[1].value + " m/day, Pore water velocity (v) : " + v.toFixed(2) + " m/day";;
+//  mychart2();
+output[1].innerHTML = slider[1].value;
+flow.innerHTML = "Darcy velocity (q): " + q.toFixed(2) + " m/day, Pore water velocity (v) : " + v.toFixed(2) + " m/day";
   }
 
 slider[2].oninput = function() {
  mychart();
- mychart2();
+//  mychart2();
 output[2].innerHTML = slider[2].value;
   }
 
 slider[3].oninput = function() {
  mychart();
- mychart2();
+//  mychart2();
  output[3].innerHTML = slider[3].value;
  myTime.innerHTML = slider[3].value;
   }
 
 slider[4].oninput = function() {
  mychart();
- mychart2();
+//  mychart2();
 output[4].innerHTML = slider[4].value;
   }
 
 slider[5].oninput = function() {
  mychart();
- mychart2();
+//  mychart2();
 output[5].innerHTML = slider[5].value;
+  }
+
+slider[6].oninput = function() {
+  mychart();
+  //  mychart2();
+  output[6].innerHTML = slider[6].value;
+    }
+
+slider[7].oninput = function() {
+mychart();
+//  mychart2();
+output[7].innerHTML = slider[7].value;
   }
             
   // $("#canvas1").load(" #canvas1");

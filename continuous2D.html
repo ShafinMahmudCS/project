@@ -39,7 +39,7 @@
 
     <div id="top">
       <a id="header" href="index.html"
-        ><h1>Contaminant Transport Visualizer</h1></a
+        ><h1>Subsurface Transport Visualization Tool</h1></a
       >
     </div>
 
@@ -47,7 +47,8 @@
 
     <p>
       <b>Constant Conditions:</b> <b>Effective porosity (n<sub>e</sub>)</b> =
-      0.35, <b>Dispersivity (&alpha;)</b> = 1 m
+      0.35, <b>Longitudinal dispersivity (&alpha;<sub>x</sub>)</b> = 4.919 m,
+      <b>Transverse dispersivity (&alpha;<sub>y</sub>)</b> = 0.4919 m
     </p>
 
     <div class="container">
@@ -67,15 +68,18 @@
       <div class="slidecontainer2">
         <input
           type="range"
-          min="0.00000"
-          max="0.50000"
-          step="0.00001"
-          value="0.20000"
+          min="1.00"
+          max="50.00"
+          step="0.01"
+          value="3.66"
           class="slider"
           id="myRange"
         />
 
-        <p>Darcy velocity (q): <span class="demo"></span></p>
+        <p>
+          Flow rate (Q): <span class="demo"></span> m<sup>3</sup>/day,
+          <span class="flow"></span>
+        </p>
       </div>
     </div>
 
@@ -100,20 +104,43 @@
       <div class="slidecontainer4">
         <input
           type="range"
-          min="0"
-          max="500"
-          step="10"
-          value="80"
+          min="1.00"
+          max="5.00"
+          step="0.01"
+          value="1.75"
           class="slider"
           id="myRange"
         />
 
-        <p>
-          <span class="blue">Time (t):</span> <span class="demo"></span> day
-          (s)/
-          <span class="pink">Distance (x):</span>
-          <span class="myTime"></span> m
-        </p>
+        <p>Aquifer thickness (b): <span class="demo"></span> m</p>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="slidecontainer5">
+        <input
+          type="range"
+          min="0"
+          max="20"
+          value="16"
+          class="slider"
+          id="myRange"
+        />
+
+        <p>y: <span class="demo"></span> m</p>
+      </div>
+
+      <div class="slidecontainer6">
+        <input
+          type="range"
+          min="1"
+          max="20"
+          value="10"
+          class="slider"
+          id="myRange"
+        />
+
+        <p>time (t): <span class="demo"></span> day(s)</p>
       </div>
     </div>
 
@@ -122,7 +149,7 @@
         <input
           type="range"
           min="1.00000"
-          max="10.00000"
+          max="5.00000"
           value="1.00000"
           step="0.00001"
           class="slider"
@@ -135,9 +162,9 @@
       <div class="slidecontainer8">
         <input
           type="range"
-          min="0"
-          max="15000"
-          value="90"
+          min="1"
+          max="1500"
+          value="1500"
           class="slider"
           id="myRange"
         />
