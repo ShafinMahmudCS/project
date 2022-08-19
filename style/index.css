@@ -3,6 +3,36 @@ body {
   background-color: #f0f0f0;
 }
 
+#mainImg{
+  width: 70%;
+  border: 5px solid #1b3056;
+}
+
+#logo2{
+width: 200px;
+  margin-right: 7%;
+}
+
+figure{
+  margin-right: 2%;
+}
+
+
+figcaption{
+  text-align: center;
+}
+
+.contactInfo{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.lg{
+  display: flex;
+  flex-direction: row-reverse;
+}
+
 #header, #highlight{
   color: #284377;
   font-weight:600;
@@ -79,12 +109,16 @@ footer{
 .myNavbar a {
   font-size: 18px;
   color: white;
-  text-decoration: none;
+
   text-align: center;
 }
 
 .myNavbar:hover{
   background-color: #1b3056d2;
+}
+
+.links{
+  font-weight: bold;
 }
 
 @media screen and (max-width: 1220px){

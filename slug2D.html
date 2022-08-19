@@ -14,14 +14,9 @@
       href="./style/visualStyle.css"
       title="style"
     />
-
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
     <script src="https://unpkg.com/mathjs/lib/browser/math.js"></script>
-    <!--Copyright (C) 2013-present   SheetJS LLC-->
-    <script src="./script/bessel.js"></script>
-    <script src="https://cdn.rawgit.com/SheetJS/printj/master/printj.js"></script>
-
     <title>My Chart</title>
   </head>
   <body>
@@ -43,12 +38,12 @@
       >
     </div>
 
-    <h2>2D Continuous Injection</h2>
+    <h2>2D Slug Injection</h2>
 
     <p>
       <b>Constant Conditions:</b> <b>Effective porosity (n<sub>e</sub>)</b> =
-      0.35, <b>Longitudinal dispersivity (&alpha;<sub>x</sub>)</b> = 4.919 m,
-      <b>Transverse dispersivity (&alpha;<sub>y</sub>)</b> = 0.4919 m
+      0.3, <b>Longitudinal dispersivity (&alpha;<sub>x</sub>)</b> = 1 m,
+      <b>Transverse dispersivity (&alpha;<sub>y</sub>)</b> = 0.1 m
     </p>
 
     <div class="container">
@@ -60,8 +55,9 @@
         <input
           type="range"
           min="0"
-          max="200"
-          value="133"
+          max="750"
+          step="50"
+          value="650"
           class="slider"
           id="myRange"
         />
@@ -69,18 +65,15 @@
 
       <div class="slidecontainer2">
         <p>
-          <b
-            >Flow rate (Q): <span class="demo"></span> m<sup>3</sup>/day,
-            <span class="flow"></span
-          ></b>
+          <b>Darcy velocity (q): <span class="demo"></span></b>
         </p>
 
         <input
           type="range"
-          min="1.00"
-          max="50.00"
-          step="0.01"
-          value="3.66"
+          min="0.0000"
+          max="4.0000"
+          step="0.0001"
+          value="4.0"
           class="slider"
           id="myRange"
         />
@@ -99,7 +92,7 @@
         <input
           type="range"
           min="0.0000000000"
-          max="1.0000000000"
+          max="0.3000000000"
           value="0.0000000001"
           step="0.0000000001"
           class="slider"
@@ -109,15 +102,19 @@
 
       <div class="slidecontainer4">
         <p>
-          <b>Aquifer thickness (b): <span class="demo"></span> m</b>
+          <b>
+            <span class="blue">Time (t):</span>
+            <span class="demo"></span> day(s)/
+            <span class="pink">Distance (x):</span>
+            <span class="myTime"></span> m
+          </b>
         </p>
 
         <input
           type="range"
-          min="1.00"
-          max="5.00"
-          step="0.01"
-          value="1.75"
+          min="1"
+          max="100"
+          value="22"
           class="slider"
           id="myRange"
         />
@@ -133,8 +130,8 @@
         <input
           type="range"
           min="0"
-          max="20"
-          value="16"
+          max="12"
+          value="5"
           class="slider"
           id="myRange"
         />
@@ -142,14 +139,14 @@
 
       <div class="slidecontainer6">
         <p>
-          <b>time (t): <span class="demo"></span> day(s)</b>
+          <b>Area (a): <span class="demo"></span> m<sup>2</sup></b>
         </p>
 
         <input
           type="range"
-          min="1"
-          max="20"
-          value="10"
+          min="0"
+          max="10"
+          value="5"
           class="slider"
           id="myRange"
         />
@@ -164,10 +161,10 @@
 
         <input
           type="range"
-          min="1.00000"
-          max="5.00000"
-          value="1.00000"
-          step="0.00001"
+          min="1.000"
+          max="3.000"
+          step="0.001"
+          value="1.000"
           class="slider"
           id="myRange"
         />
@@ -180,31 +177,31 @@
 
         <input
           type="range"
-          min="1"
-          max="1500"
-          value="1500"
+          min="0"
+          max="1000"
+          value="1"
           class="slider"
           id="myRange"
         />
       </div>
     </div>
 
-    <div class="canvasSideContinuous">
+    <div class="canvasSide">
       <div class="myCanvas">
         <canvas id="canvas1"></canvas>
       </div>
 
-      <!-- <div class="myCanvas">
+      <div class="myCanvas">
         <canvas id="canvas2"></canvas>
-      </div> -->
+      </div>
     </div>
 
     <div class="mybtn">
-      <!-- <div class="left">
+      <div class="left">
         <button class="btn" onclick="toggleZoom1()">toggle Zoom</button>
-      </div> -->
+      </div>
       <div class="right">
-        <button class="btn" onclick="toggleZoom1()">toggle Zoom</button>
+        <button class="btn" onclick="toggleZoom2()">toggle Zoom</button>
       </div>
     </div>
 
@@ -229,6 +226,6 @@
       referrerpolicy="no-referrer"
     ></script>
 
-    <script src="./script/continuous2D.js"></script>
+    <script src="./script/slug2D.js"></script>
   </body>
 </html>

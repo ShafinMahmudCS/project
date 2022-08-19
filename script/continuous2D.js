@@ -397,7 +397,7 @@ output[7].innerHTML = slider[7].value;
       zoom: {
         limits: {
           x: {min: 0, max: 35},
-          y: {min: 0, max: 200}
+          y: {min: 0}
         },
         pan: {
           enabled: true,

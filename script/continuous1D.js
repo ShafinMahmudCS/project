@@ -13,61 +13,60 @@ function expo(x, f) {
   return Number.parseFloat(x).toExponential(f);
 }
 
+var myZoom1 = false;
+var myZoom2 = false;
+
 function toggleZoom1(){
-  if(myZoom==true){
-    myZoom = false;
+  if(myZoom1==true){
+    myZoom1 = false;
   }else{
-  myZoom = true;
+  myZoom1 = true;
   }
   mychart();
 }
 
 function toggleZoom2(){
-  if(myZoom==true){
-    myZoom = false;
+  if(myZoom2==true){
+    myZoom2 = false;
   }else{
-  myZoom = true;
+  myZoom2 = true;
   }
   mychart2();
 }
 
-var myZoom = false;
 
-var  m = 1000;
-var Area = 1;
+
+var C0 = 25;
+
+var q = 0.2;
+
 var n = 0.35;
-var q = 0.08;
-var Dstar = 0.00000864;
-var alphaX = 5;
+var v = q / n;
 var R = 1;
-var v = q/n;
-var DL =  Dstar + (alphaX*v);
-var vR = v/R;
-var DR = DL/R;
-var time = 100;
-var distance = 50;
+var vR = v / R;
+var alpha = 1;
 
-var lambda = 500;
+var Dstar = 0.0000000001;
+var D = Dstar + (alpha * v);
 
+var DR = D / R;
 
+var distance = 80;
 
+var lambda = 90;
 
 var ctx2 = document.getElementById("canvas2");
 
-var tValues = [1, 2.5, 5, 7.5, 10, 12.5, 15, 17.5, 20, 25, 30, 35, 40, 50, 60, 70, 80, 100, 120, 140, 160, 180, 200, 220, 240, 260, 280, 300, 320, 340, 360, 380, 420, 460, 500];
+const tValues = [1, 5, 10, 20, 30, 40, 50, 60, 70, 80, 100, 120, 140, 160, 180, 200, 240, 280, 320, 360, 440, 520, 600, 680, 840, 1000];
 
 var tyValues = [];
 
-for(let i =0; i<tValues.length; i++){
+for (let i = 0; i < tValues.length; i++) {
   var obj = {};
   obj.x = tValues[i];
-  var a1 = m/Area/n/Math.sqrt(4*Math.PI*DR*tValues[i]);
-  console.log(a1);
-  var a2 = 0-((distance-vR*tValues[i])**2)/(4*DR*tValues[i]);
-  console.log(a2);
-  var C = a1*Math.exp(a2)*Math.exp(-Math.log(2)/lambda*tValues[i]);
-  console.log(C);
-  obj.y = C;
+  var C2 = (C0 / 2) * (ERFC((distance - vR * tValues[i]) / (2 * Math.sqrt(DR * tValues[i]))) - (Math.exp(vR * distance / DR)) * (ERFC((distance + vR * tValues[i]) / (2 * Math.sqrt(DR * tValues[i]))))) * (Math.exp((-Math.log(2) / lambda) * tValues[i]));
+  obj.y = C2.toFixed(2);
+  console.log(C2);
   tyValues.push(obj);
 }
 
@@ -91,7 +90,7 @@ var chart2 = new Chart(ctx2,{
     scales: {
       x: {
         position: 'bottom',
-        min: 0, max:600,
+        min: 0, max:1000,
         title: {
           display: true,
           text: 'Time (days)',
@@ -102,7 +101,7 @@ var chart2 = new Chart(ctx2,{
       },
       y:{
         min: 0,
-        max: 60.0,
+        max: 35.0,
         position: 'left',
         title: {
           display: true,
@@ -127,7 +126,7 @@ var chart2 = new Chart(ctx2,{
     },
     zoom: {
       limits: {
-        x: {min: 0, max: 35},
+        x: {min: 0, max: 1000},
         y: {min: 0}
       },
       pan: {
@@ -136,7 +135,7 @@ var chart2 = new Chart(ctx2,{
       },
       zoom: {
         wheel: {
-          enabled: myZoom,
+          enabled: myZoom2,
           speed:0.05
         },
         pinch: {
@@ -148,39 +147,38 @@ var chart2 = new Chart(ctx2,{
   }
 }});
 
-var  m = 1000;
-var Area = 1;
+var C0 = 25;
+
+var q = 0.2;
+
 var n = 0.35;
-var q = 0.08;
-var Dstar = 0.00000864;
-var alphaX = 5;
-var R = 1;
 var v = q/n;
-var DL =  Dstar + (alphaX*v);
+var R = 1;
 var vR = v/R;
-var DR = DL/R;
-var time = 50;
-var distance = 50;
+var alpha = 1;
 
-var lambda = 500;
+var Dstar = 0.0000000001;
+var D =  Dstar + (alpha*v);
 
-var a1 = m/Area/n/Math.sqrt(4*Math.PI*DR*time);
+var DR = D/R;
 
+var lambda = 90;
+var time = 80;
 
 var ctx1 = document.getElementById("canvas1").getContext("2d");
 
-    const xValues = [0, 2.5, 5, 7.5, 10, 12.5, 15, 17.5, 20, 25, 30, 35, 40, 50, 60, 70, 80, 100, 120, 140, 160, 180, 200, 220, 240, 260, 280, 300, 320, 340, 360, 380, 420, 460, 500];
+  const xValues = [0, 5, 10, 15, 20, 30, 40, 50, 60, 70, 80, 100, 120, 140, 160, 180, 200, 220, 240, 260, 280, 300, 320, 340, 360, 380, 420, 460, 500];
 
-var xyValues = [];
+  var xyValues = [];
 
-for(let i =0; i<xValues.length; i++){
-  var obj = {};
-  obj.x = xValues[i];
-  var a2 = 0-((xValues[i]-vR*time)**2)/(4*DR*time);
-  var C = a1*Math.exp(a2)*Math.exp(-Math.log(2)/lambda*time);
-  obj.y = expo(C, 7);
-  xyValues.push(obj);
-}
+  console.log(Math.exp(-Math.log10(2)/lambda*time));
+  for(let i =0; i<xValues.length; i++){
+    var obj = {};
+    obj.x = xValues[i];
+    var C = (C0/2)*(ERFC((xValues[i]-vR*time)/(2*Math.sqrt(DR*time)))-(Math.exp(vR*xValues[i]/DR)*(ERFC((xValues[i]+vR*time)/(2*Math.sqrt(DR*time))))))*(Math.exp(-(Math.log(2)/lambda*time)));
+    obj.y = C.toFixed(2);
+    xyValues.push(obj);
+  }
 
 
 var chart1 = new Chart(ctx1,{
@@ -214,7 +212,7 @@ var chart1 = new Chart(ctx1,{
       },
       y:{
         min: 0,
-        max: 100.0,
+        max: 35.0,
         position: 'left',
         title: {
           display: true,
@@ -248,7 +246,7 @@ var chart1 = new Chart(ctx1,{
       },
       zoom: {
         wheel: {
-          enabled: myZoom,
+          enabled: myZoom1,
           speed:0.05
         },
         pinch: {
@@ -274,10 +272,9 @@ output[0].innerHTML = slider[0].value;
 output[1].innerHTML = slider[1].value + " m/day, Pore water velocity (v) : " + v.toFixed(2) + " m/day";
 output[2].innerHTML = slider[2].value;
 output[3].innerHTML = slider[3].value;
-myTime.innerHTML = slider[2].value;
+myTime.innerHTML = slider[3].value;
 output[4].innerHTML = slider[4].value;
 output[5].innerHTML = slider[5].value;
-output[6].innerHTML = slider[6].value;
   //function slider
 
   function mychart(){
@@ -285,33 +282,29 @@ output[6].innerHTML = slider[6].value;
     chart1.destroy();
 
     //initial conditions (without sorption)
-    var m = slider[0].value;
-    var Area = slider[3].value;
+    var C0 = parseFloat(slider[0].value);
+    var q = parseFloat(slider[1].value);
+    var alpha = 1;
+  
     var n = 0.35;
-    var q = slider[1].value;
-    var Dstar = parseFloat(slider[6].value);
-    var alphaX = 5;
-    var R = slider[4].value;
-    var v = q/n;
-    var DL =  Dstar + (alphaX*v);
-    var vR = v/R;
-    var DR = DL/R;
-    var time = slider[2].value;
-    var lambda = slider[5].value;
-
-    var a1 = m/Area/n/Math.sqrt(4*Math.PI*DR*time);
-
+    v = q / n;
+    var R = parseFloat(slider[4].value);
+    var vR = v / R;
+    var Dstar = parseFloat(slider[2].value);
+    var D = Dstar + (alpha * v);
+    var DR = D / R;
+    var time = parseFloat(slider[3].value);
+    var lambda = parseFloat(slider[5].value);
     
-    const xValues = [0, 2.5, 5, 7.5, 10, 12.5, 15, 17.5, 20, 25, 30, 35, 40, 50, 60, 70, 80, 100, 120, 140, 160, 180, 200, 220, 240, 260, 280, 300, 320, 340, 360, 380, 420, 460, 500];
-
+    const xValues = [0, 5, 10, 15, 20, 30, 40, 50, 60, 70, 80, 100, 120, 140, 160, 180, 200, 220, 240, 260, 280, 300, 320, 340, 360, 380, 420, 460, 500];
+    
     var xyValues = [];
     
     for(let i =0; i<xValues.length; i++){
       var obj = {};
       obj.x = xValues[i];
-      var a2 = 0-((xValues[i]-vR*time)**2)/(4*DR*time);
-      var C = a1*Math.exp(a2)*Math.exp(-Math.log(2)/lambda*time);
-      obj.y = expo(C, 7);
+      var C = (C0/2)*(ERFC((xValues[i]-vR*time)/(2*Math.sqrt(DR*time)))-(Math.exp(vR*xValues[i]/DR)*(ERFC((xValues[i]+vR*time)/(2*Math.sqrt(DR*time))))))*(Math.exp(-(Math.log(2)/lambda*time)));
+      obj.y = C.toFixed(2);
       xyValues.push(obj);
     }
   
@@ -346,7 +339,7 @@ output[6].innerHTML = slider[6].value;
         },
         y:{
           min: 0,
-          max: 100.0,
+          max: 35.0,
           position: 'left',
           title: {
             display: true,
@@ -380,7 +373,7 @@ output[6].innerHTML = slider[6].value;
         },
         zoom: {
           wheel: {
-            enabled: myZoom,
+            enabled: myZoom1,
             speed:0.05
           },
           pinch: {
@@ -399,37 +392,30 @@ output[6].innerHTML = slider[6].value;
     chart2.destroy();
 
     //initial conditions (without sorption)
-  var m = slider[0].value;
-  var q = slider[1].value;
-  var distance = slider[2].value;
-  var n = 0.35;
-  v = q/n;
-  var Area = slider[3].value;
-  var R = slider[4].value;
-  var lambda = slider[5].value;
-  var vR = v/R;
+    var C0 = parseFloat(slider[0].value);
+    var q = parseFloat(slider[1].value);
+    var alpha = 1;
   
-  var Dstar = parseFloat(slider[6].value);
-
-var alphaX = 5;
-var DL =  Dstar + (alphaX*v);
-var DR = DL/R;
-
+    var n = 0.35;
+    var v = q / n;
+    var R = parseFloat(slider[4].value);
+    var vR = v / R;
+    var Dstar = parseFloat(slider[2].value);
+    var D = Dstar + (alpha * v);
+    var DR = D / R;
+    var distance = parseFloat(slider[3].value);
+    var lambda = parseFloat(slider[5].value);
   
-  var tValues = [1, 2.5, 5, 7.5, 10, 12.5, 15, 17.5, 20, 25, 30, 35, 40, 50, 60, 70, 80, 100, 120, 140, 160, 180, 200, 220, 240, 260, 280, 300, 320, 340, 360, 380, 420, 460, 500];
+  const tValues = [1, 5, 10, 20, 30, 40, 50, 60, 70, 80, 100, 120, 140, 160, 180, 200, 240, 280, 320, 360, 440, 520, 600, 680, 840, 1000];
 
   var tyValues = [];
   
-  for(let i =0; i<tValues.length; i++){
+  for (let i = 0; i < tValues.length; i++) {
     var obj = {};
     obj.x = tValues[i];
-    var a1 = m/Area/n/Math.sqrt(4*Math.PI*DR*tValues[i]);
-    console.log(a1);
-    var a2 = 0-((distance-vR*tValues[i])**2)/(4*DR*tValues[i]);
-    console.log(a2);
-    var C = a1*Math.exp(a2)*Math.exp(-Math.log(2)/lambda*tValues[i]);
-    console.log(C);
-    obj.y = C;
+    var C2 = (C0 / 2) * (ERFC((distance - vR * tValues[i]) / (2 * Math.sqrt(DR * tValues[i]))) - (Math.exp(vR * distance / DR)) * (ERFC((distance + vR * tValues[i]) / (2 * Math.sqrt(DR * tValues[i]))))) * (Math.exp((-Math.log(2) / lambda) * tValues[i]));
+    obj.y = C2.toFixed(2);
+    console.log(C2);
     tyValues.push(obj);
   }
   
@@ -453,7 +439,7 @@ var DR = DL/R;
       scales: {
         x: {
           position: 'bottom',
-          min: 0, max:600,
+          min: 0, max:1000,
           title: {
             display: true,
             text: 'Time (days)',
@@ -464,7 +450,7 @@ var DR = DL/R;
         },
         y:{
           min: 0,
-          max: 60.0,
+          max: 35.0,
           position: 'left',
           title: {
             display: true,
@@ -489,7 +475,7 @@ var DR = DL/R;
       },
       zoom: {
         limits: {
-          x: {min: 0, max: 35},
+          x: {min: 0, max: 1000},
           y: {min: 0}
         },
         pan: {
@@ -498,7 +484,7 @@ var DR = DL/R;
         },
         zoom: {
           wheel: {
-            enabled: myZoom,
+            enabled: myZoom2,
             speed:0.05
           },
           pinch: {
@@ -514,45 +500,39 @@ var DR = DL/R;
 
 slider[0].oninput = function() {
  mychart();
-mychart2();
+ mychart2();
 output[0].innerHTML = slider[0].value;
   }
 
 slider[1].oninput = function() {
  mychart();
-mychart2();
+ mychart2();
 output[1].innerHTML = slider[1].value + " m/day, Pore water velocity (v) : " + v.toFixed(2) + " m/day";;
   }
 
 slider[2].oninput = function() {
  mychart();
-mychart2();
+ mychart2();
 output[2].innerHTML = slider[2].value;
   }
 
 slider[3].oninput = function() {
  mychart();
-mychart2();
+ mychart2();
  output[3].innerHTML = slider[3].value;
  myTime.innerHTML = slider[3].value;
   }
 
 slider[4].oninput = function() {
  mychart();
-mychart2();
+ mychart2();
 output[4].innerHTML = slider[4].value;
   }
 
 slider[5].oninput = function() {
  mychart();
-mychart2();
+ mychart2();
 output[5].innerHTML = slider[5].value;
-  }
-
-slider[6].oninput = function() {
- mychart();
-mychart2();
-output[6].innerHTML = slider[6].value;
   }
             
   // $("#canvas1").load(" #canvas1");

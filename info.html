@@ -41,6 +41,9 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
           <ul class="navbar-nav ms-md-auto gap-2">
+            <li class="nav-item rounded lg">
+              <img id="logo2" src="images/logo2.png" alt="" />
+            </li>
             <li class="nav-item rounded">
               <a class="nav-link" aria-current="page" href="index.html"
                 ><i class="bi me-2"></i>VISUALIZER</a
@@ -74,13 +77,23 @@
       <h3 id="highlight">Advection Dispersion Equation:</h3>
 
       <div class="container">
-        <img src="images/AD.png" alt="" />
+        <figure>
+          <img src="images/AD.png" alt="" />
+          <figcaption>
+            Source: Contaminant Hydrogeology by C. W. Fetter
+          </figcaption>
+        </figure>
       </div>
 
       <h3 id="highlight">Analytical Solutions under Various Assumptions:</h3>
 
       <div class="container">
-        <img id="visual" src="images/Asol.png" alt="" />
+        <figure>
+          <img id="visual" src="images/Asol.png" alt="" />
+          <figcaption>
+            Source: Contaminant Hydrogeology by C. W. Fetter
+          </figcaption>
+        </figure>
       </div>
 
       <h3 id="highlight">Parameters</h3>
@@ -92,11 +105,11 @@
         effective porosity [-].
       </p>
       <p class="text">
-        <b>Longitudinal dispersivity (&alpha;<sub>x</sub>):</b> Assuming that
-        mechanical dispersion is linearly dependent on average porewater
-        velocity, longitudinal dispersity is defined as the ratio of
+        <b>Longitudinal dispersivity (&alpha;<sub>x</sub>):</b> Using the
+        assumption that mechanical dispersion is linearly related to average
+        porewater velocity, longitudinal dispersity is defined as the ratio of
         longitudinal dispersion coefficient (dispersion in the direction of
-        flow) to the average porewater velocity [L]. It represents the local
+        flow) to average porewater velocity. [L]. It represents the local
         variations in the groundwater velocity in the direction of flow.
       </p>
       <p class="text">
@@ -139,9 +152,10 @@
         [L<sup>2</sup>]
       </p>
       <p class="text">
-        <b>Retardation factor (R):</b> Due to sorption processes, some solutes
-        will move much more slowly through the aquifer than the groundwater that
-        is transporting them; this effect is called retardation [-]
+        <b>Retardation factor (R):</b> Some solutes will travel considerably
+        more slowly through the aquifer than the groundwater that transports
+        them due to sorption processes; this phenomenon is referred to as
+        retardation. [-]
       </p>
       <p class="text">
         <b>Half-life (&lambda;):</b> The time required for a substance to reduce
