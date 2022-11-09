@@ -5,6 +5,7 @@ var loader = setInterval(function () {
   document.querySelector('.spinner-wrapper').style.display = "none";
 }, 250);
 
+//helper functions
 function ERFC(value1){
   return 1-math.erf(value1);
 }
@@ -33,6 +34,8 @@ function toggleZoom2(){
 
 var myZoom = false;
 
+// Initial Concentration vs Time graph on page load
+
 var  m = 1000;
 var Area = 1;
 var n = 0.35;
@@ -50,8 +53,6 @@ var distance = 50;
 var lambda = 500;
 
 
-
-
 var ctx2 = document.getElementById("canvas2");
 
 var tValues = [1, 2.5, 5, 7.5, 10, 12.5, 15, 17.5, 20, 25, 30, 35, 40, 50, 60, 70, 80, 100, 120, 140, 160, 180, 200, 220, 240, 260, 280, 300, 320, 340, 360, 380, 420, 460, 500];
@@ -62,11 +63,8 @@ for(let i =0; i<tValues.length; i++){
   var obj = {};
   obj.x = tValues[i];
   var a1 = m/Area/n/Math.sqrt(4*Math.PI*DR*tValues[i]);
-  console.log(a1);
   var a2 = 0-((distance-vR*tValues[i])**2)/(4*DR*tValues[i]);
-  console.log(a2);
   var C = a1*Math.exp(a2)*Math.exp(-Math.log(2)/lambda*tValues[i]);
-  console.log(C);
   obj.y = C;
   tyValues.push(obj);
 }
@@ -147,6 +145,8 @@ var chart2 = new Chart(ctx2,{
     }
   }
 }});
+
+// Initial Concentration vs Distance graph on page load
 
 var  m = 1000;
 var Area = 1;
@@ -261,13 +261,10 @@ var chart1 = new Chart(ctx1,{
 }});
 
 
-  // console.log(chart1.options.scales.yAxes[0].ticks.max);
-
-
 var str; 
 
-var slider = document.querySelectorAll(".slider");
-var output = document.querySelectorAll(".demo");
+var slider = document.querySelectorAll(".slider"); // all the sliders from HTML
+var output = document.querySelectorAll(".demo");  // all the output fields from HTML
 var myTime = document.querySelector(".myTime");
 
 output[0].innerHTML = slider[0].value;
@@ -278,7 +275,8 @@ myTime.innerHTML = slider[2].value;
 output[4].innerHTML = slider[4].value;
 output[5].innerHTML = slider[5].value;
 output[6].innerHTML = slider[6].value;
-  //function slider
+
+// Updating Concentration vs Distance graph
 
   function mychart(){
     let pos = $(document).scrollTop();
@@ -394,6 +392,8 @@ output[6].innerHTML = slider[6].value;
   $(document).scrollTop(pos);
   }
 
+    // Updating Concentration vs Time graph
+
   function mychart2(){
     let pos = $(document).scrollTop();
     chart2.destroy();
@@ -424,11 +424,8 @@ var DR = DL/R;
     var obj = {};
     obj.x = tValues[i];
     var a1 = m/Area/n/Math.sqrt(4*Math.PI*DR*tValues[i]);
-    console.log(a1);
     var a2 = 0-((distance-vR*tValues[i])**2)/(4*DR*tValues[i]);
-    console.log(a2);
     var C = a1*Math.exp(a2)*Math.exp(-Math.log(2)/lambda*tValues[i]);
-    console.log(C);
     obj.y = C;
     tyValues.push(obj);
   }
@@ -512,6 +509,8 @@ var DR = DL/R;
   $(document).scrollTop(pos);
   }
 
+  //sliders
+
 slider[0].oninput = function() {
  mychart();
 mychart2();
@@ -554,8 +553,6 @@ slider[6].oninput = function() {
 mychart2();
 output[6].innerHTML = slider[6].value;
   }
-            
-  // $("#canvas1").load(" #canvas1");
 
   //button
   $(".btn").mousedown(function(){

@@ -5,6 +5,7 @@ var loader = setInterval(function () {
   document.querySelector('.spinner-wrapper').style.display = "none";
 }, 250);
 
+//helper functions
 function ERFC(value1){
   return 1-math.erf(value1);
 }
@@ -31,8 +32,9 @@ function toggleZoom2(){
   mychart2();
 }
 
-var myZoom = false;
+// Initial Concentration vs Time graph on page load
 
+var myZoom = false;
 var C0 = 650;
 var q = 4;
 var n = 0.3;
@@ -145,6 +147,8 @@ var chart2 = new Chart(ctx2,{
   }
 }});
 
+// Initial Concentration vs Distance graph on page load
+
 var C0 = 650;
 var q = 4;
 var n = 0.3;
@@ -178,7 +182,6 @@ for(let i =0; i<xValues.length; i++){
   var C = C0*Area/(4*(Math.PI)*time*Math.sqrt(DtR*DLR))*Math.exp(-((xValues[i]-vR*time)**2)/(4*DLR*time)-y**2/(4*DtR*time))*(Math.exp(-(Math.log(2)/lambda*time)));
   obj.y = expo(C, 7);
   xyValues.push(obj);
-  console.log(obj);
 }
 
 
@@ -260,13 +263,10 @@ var chart1 = new Chart(ctx1,{
 }});
 
 
-  // console.log(chart1.options.scales.yAxes[0].ticks.max);
-
-
 var str; 
 
-var slider = document.querySelectorAll(".slider");
-var output = document.querySelectorAll(".demo");
+var slider = document.querySelectorAll(".slider"); // all the sliders from HTML
+var output = document.querySelectorAll(".demo");  // all the output fields from HTML
 var myTime = document.querySelector(".myTime");
 
 output[0].innerHTML = slider[0].value;
@@ -278,7 +278,8 @@ output[4].innerHTML = slider[4].value;
 output[5].innerHTML = slider[5].value;
 output[6].innerHTML = slider[6].value;
 output[7].innerHTML = slider[7].value;
-  //function slider
+ 
+// Updating Concentration vs Distance graph
 
   function mychart(){
     let pos = $(document).scrollTop();
@@ -316,7 +317,6 @@ output[7].innerHTML = slider[7].value;
       var C = C0*Area/(4*(Math.PI)*time*Math.sqrt(DtR*DLR))*Math.exp(-((xValues[i]-vR*time)**2)/(4*DLR*time)-y**2/(4*DtR*time))*(Math.exp(-(Math.log(2)/lambda*time)));
       obj.y = expo(C, 4);
       xyValues.push(obj);
-      console.log(obj);
     }
   
   chart1 = new Chart(ctx1,{
@@ -397,6 +397,8 @@ output[7].innerHTML = slider[7].value;
   }});
   $(document).scrollTop(pos);
   }
+
+  // Updating Concentration vs Time graph
 
   function mychart2(){
     let pos = $(document).scrollTop();
@@ -514,6 +516,8 @@ output[7].innerHTML = slider[7].value;
   $(document).scrollTop(pos);
   }
 
+  //sliders
+
 slider[0].oninput = function() {
  mychart();
  mychart2();
@@ -562,8 +566,6 @@ slider[7].oninput = function() {
  mychart2();
 output[7].innerHTML = slider[7].value;
   }
-            
-  // $("#canvas1").load(" #canvas1");
 
   //button
   $(".btn").mousedown(function(){

@@ -52,6 +52,7 @@
       <b>Transverse dispersivity (&alpha;<sub>y</sub>)</b> = 0.4919 m
     </p>
 
+    <!-- Sliders-->
     <div class="container">
       <div class="slidecontainer">
         <p>
@@ -79,7 +80,7 @@
         <input
           type="range"
           min="1.00"
-          max="50.00"
+          max="5.00"
           step="0.01"
           value="3.66"
           class="slider"
@@ -91,18 +92,15 @@
     <div class="container">
       <div class="slidecontainer3">
         <p>
-          <b>
-            Effective diffusion coefficient (D*):
-            <span class="demo"></span> m<sup>2</sup>/day
-          </b>
+          <b>Retardation factor (R) : <span class="demo"></span></b>
         </p>
 
         <input
           type="range"
-          min="0.0000000000"
-          max="1.0000000000"
-          value="0.0000000001"
-          step="0.0000000001"
+          min="1.00000"
+          max="5.00000"
+          value="1.00000"
+          step="0.00001"
           class="slider"
           id="myRange"
         />
@@ -143,39 +141,6 @@
 
       <div class="slidecontainer6">
         <p>
-          <b>time (t): <span class="demo"></span> day(s)</b>
-        </p>
-
-        <input
-          type="range"
-          min="1"
-          max="20"
-          value="10"
-          class="slider"
-          id="myRange"
-        />
-      </div>
-    </div>
-
-    <div class="container">
-      <div class="slidecontainer7">
-        <p>
-          <b>Retardation factor (R) : <span class="demo"></span></b>
-        </p>
-
-        <input
-          type="range"
-          min="1.00000"
-          max="5.00000"
-          value="1.00000"
-          step="0.00001"
-          class="slider"
-          id="myRange"
-        />
-      </div>
-
-      <div class="slidecontainer8">
-        <p>
           <b>Half-life (&lambda;): <span class="demo"></span> day(s)</b>
         </p>
 
@@ -190,20 +155,36 @@
       </div>
     </div>
 
+    <div class="diffContainer">
+      <div class="slidecontainer1D">
+        <p>
+          <b>
+            Effective diffusion coefficient (D*):
+            <span class="demo"></span> m<sup>2</sup>/day
+          </b>
+        </p>
+
+        <input
+          type="range"
+          min="0.00000000"
+          max="1.00000000"
+          value="0.00000864"
+          step="0.00000001"
+          class="slider"
+          id="myRange"
+        />
+      </div>
+    </div>
+
+    <!--Graphs-->
     <div class="canvasSideContinuous">
       <div class="myCanvas">
         <canvas id="canvas1"></canvas>
       </div>
-
-      <!-- <div class="myCanvas">
-        <canvas id="canvas2"></canvas>
-      </div> -->
     </div>
 
+    <!--Zoom button-->
     <div class="mybtn">
-      <!-- <div class="left">
-        <button class="btn" onclick="toggleZoom1()">toggle Zoom</button>
-      </div> -->
       <div class="right">
         <button class="btn" onclick="toggleZoom1()">toggle Zoom</button>
       </div>
