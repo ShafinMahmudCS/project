@@ -35,6 +35,8 @@ function toggleZoom2(){
   mychart2();
 }
 
+document.getElementById("downloadButton1").addEventListener("click", downloadExcel1);
+document.getElementById("downloadButton2").addEventListener("click", downloadExcel2);
 
 // Initial Concentration vs Time graph on page load
 var C0 = 25;
@@ -555,3 +557,107 @@ $(".btn").on("tap",function(){
 $(".btn").mouseout(function(){
     $(this).removeClass("pressed");
 });
+
+function downloadExcel1() {
+  // Fetch updated slider values
+  var C0 = parseFloat(slider[0].value);
+  var q = parseFloat(slider[1].value);
+  var alpha = 1;
+
+  var n = 0.35;
+  v = q / n;
+  var R = parseFloat(slider[4].value);
+  var vR = v / R;
+  var Dstar = parseFloat(slider[2].value);
+  var D = Dstar + (alpha * v);
+  var DR = D / R;
+  var time = parseFloat(slider[3].value);
+  var lambda = parseFloat(slider[5].value);
+  
+  const xValues = [0, 5, 10, 15, 20, 30, 40, 50, 60, 70, 80, 100, 120, 140, 160, 180, 200, 220, 240, 260, 280, 300, 320, 340, 360, 380, 420, 460, 500];
+  
+  var xyValues = [];
+  
+  for(let i =0; i<xValues.length; i++){
+    var obj = {};
+    obj.x = xValues[i];
+    var C = (C0/2)*(ERFC((xValues[i]-vR*time)/(2*Math.sqrt(DR*time)))-(Math.exp(vR*xValues[i]/DR)*(ERFC((xValues[i]+vR*time)/(2*Math.sqrt(DR*time))))))*(Math.exp(-(Math.log(2)/lambda*time)));
+    obj.y = C.toFixed(2);
+    xyValues.push(obj);
+  }
+
+  // Convert data to CSV format
+  var csvContent = "data:text/csv;charset=utf-8,";
+  var headers = ["Distance (m)", "Concentration (mg/L)"];
+  var rows = [headers];
+
+  for (var i = 0; i < xyValues.length; i++) {
+    var row = [xyValues[i].x, xyValues[i].y];
+    rows.push(row);
+  }
+
+  rows.forEach(function (rowArray) {
+    var row = rowArray.join(",");
+    csvContent += row + "\r\n";
+  });
+
+  // Create a link and trigger the download
+  var encodedUri = encodeURI(csvContent);
+  var link = document.createElement("a");
+  link.setAttribute("href", encodedUri);
+  link.setAttribute("download", "chart_data.csv");
+  document.body.appendChild(link);
+  link.click();
+}
+
+function downloadExcel2() {
+  // Fetch updated slider values
+  var C0 = parseFloat(slider[0].value);
+  var q = parseFloat(slider[1].value);
+  var alpha = 1;
+
+  var n = 0.35;
+  var v = q / n;
+  var R = parseFloat(slider[4].value);
+  var vR = v / R;
+  var Dstar = parseFloat(slider[2].value);
+  var D = Dstar + (alpha * v);
+  var DR = D / R;
+  var distance = parseFloat(slider[3].value);
+  var lambda = parseFloat(slider[5].value);
+
+const tValues = [1, 5, 10, 20, 30, 40, 50, 60, 70, 80, 100, 120, 140, 160, 180, 200, 240, 280, 320, 360, 440, 520, 600, 680, 840, 1000];
+
+var tyValues = [];
+
+for (let i = 0; i < tValues.length; i++) {
+  var obj = {};
+  obj.x = tValues[i];
+  var C2 = (C0 / 2) * (ERFC((distance - vR * tValues[i]) / (2 * Math.sqrt(DR * tValues[i]))) - (Math.exp(vR * distance / DR)) * (ERFC((distance + vR * tValues[i]) / (2 * Math.sqrt(DR * tValues[i]))))) * (Math.exp((-Math.log(2) / lambda) * tValues[i]));
+  obj.y = C2.toFixed(2);
+  tyValues.push(obj);
+}
+
+  // Convert data to CSV format
+  var csvContent = "data:text/csv;charset=utf-8,";
+  var headers = ["Distance (m)", "Concentration (mg/L)"];
+  var rows = [headers];
+
+  for (var i = 0; i < tyValues.length; i++) {
+    var row = [tyValues[i].x, tyValues[i].y];
+    rows.push(row);
+  }
+
+  rows.forEach(function (rowArray) {
+    var row = rowArray.join(",");
+    csvContent += row + "\r\n";
+  });
+
+  // Create a link and trigger the download
+  var encodedUri = encodeURI(csvContent);
+  var link = document.createElement("a");
+  link.setAttribute("href", encodedUri);
+  link.setAttribute("download", "chart_data.csv");
+  document.body.appendChild(link);
+  link.click();
+}
