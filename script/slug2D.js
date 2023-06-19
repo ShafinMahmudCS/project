@@ -32,6 +32,10 @@ function toggleZoom2(){
   mychart2();
 }
 
+
+document.getElementById("downloadButton1").addEventListener("click", downloadExcel1);
+document.getElementById("downloadButton2").addEventListener("click", downloadExcel2);
+
 // Initial Concentration vs Time graph on page load
 
 var myZoom = false;
@@ -585,3 +589,120 @@ $(".btn").on("tap",function(){
 $(".btn").mouseout(function(){
     $(this).removeClass("pressed");
 });
+
+function downloadExcel1() {
+  // Fetch updated slider values
+  var C0 = slider[0].value;
+  var q = slider[1].value;
+  var n = 0.3;
+  var v = q/n;
+  var R = slider[6].value;
+  var vR = v/R;
+  
+  var Dstar = parseFloat(slider[2].value);
+  var alphaX = 1;
+  var alphaY = 0.1;
+  var DL =  Dstar + (alphaX*v);
+  var Dt = Dstar + (alphaY*v);
+  var DLR = DL/R;
+  var DtR = Dt/R;
+  var time = slider[3].value;
+  var lambda = slider[7].value;
+  
+  var x = 75;
+  var y = slider[4].value;
+  var Area = slider[5].value;
+  
+      const xValues = [0.01, 1, 5, 10, 20, 30, 40, 50, 60, 80, 100, 120, 140, 160, 180, 200, 220, 240, 260, 280, 300, 320, 340, 360, 380, 400, 420, 440, 460, 480, 500];
+  
+  var xyValues = [];
+  
+  for(let i =0; i<xValues.length; i++){
+    var obj = {};
+    obj.x = xValues[i];
+    var C = C0*Area/(4*(Math.PI)*time*Math.sqrt(DtR*DLR))*Math.exp(-((xValues[i]-vR*time)**2)/(4*DLR*time)-y**2/(4*DtR*time))*(Math.exp(-(Math.log(2)/lambda*time)));
+    obj.y = expo(C, 4);
+    xyValues.push(obj);
+  }
+
+  // Convert data to CSV format
+  var csvContent = "data:text/csv;charset=utf-8,";
+  var headers = ["Distance (m)", "Concentration (mg/L)"];
+  var rows = [headers];
+
+  for (var i = 0; i < xyValues.length; i++) {
+    var row = [xyValues[i].x, xyValues[i].y];
+    rows.push(row);
+  }
+
+  rows.forEach(function (rowArray) {
+    var row = rowArray.join(",");
+    csvContent += row + "\r\n";
+  });
+
+  // Create a link and trigger the download
+  var encodedUri = encodeURI(csvContent);
+  var link = document.createElement("a");
+  link.setAttribute("href", encodedUri);
+  link.setAttribute("download", "chart_data.csv");
+  document.body.appendChild(link);
+  link.click();
+}
+
+function downloadExcel2() {
+  // Fetch updated slider values
+  var C0 = slider[0].value;
+  var q = slider[1].value;
+  var n = 0.3;
+  v = q/n;
+  var R = slider[6].value;
+  var vR = v/R;
+  
+  var Dstar = parseFloat(slider[2].value);
+  var alphaX = 1;
+  var alphaY = 0.1;
+  var DL =  Dstar + (alphaX*v);
+  var Dt = Dstar + (alphaY*v);
+  var DLR = DL/R;
+  var DtR = Dt/R;
+  var x = slider[3].value;
+  var lambda = slider[7].value;
+  
+  var y = slider[4].value;
+  var Area = slider[5].value;
+  
+  var tValues = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32];
+  
+  var tyValues = [];
+  
+  for(let i =0; i<tValues.length; i++){
+    var obj = {};
+    obj.x = tValues[i];
+    var C = C0*Area/(4*(Math.PI)*tValues[i]*Math.sqrt(DtR*DLR))*Math.exp(-((x-vR*tValues[i])**2)/(4*DLR*tValues[i])-y**2/(4*DtR*tValues[i]))*(Math.exp(-(Math.log(2)/lambda*tValues[i])));
+    obj.y = expo(C, 4);
+    tyValues.push(obj);
+  }
+
+  // Convert data to CSV format
+  var csvContent = "data:text/csv;charset=utf-8,";
+  var headers = ["Distance (m)", "Concentration (mg/L)"];
+  var rows = [headers];
+
+  for (var i = 0; i < tyValues.length; i++) {
+    var row = [tyValues[i].x, tyValues[i].y];
+    rows.push(row);
+  }
+
+  rows.forEach(function (rowArray) {
+    var row = rowArray.join(",");
+    csvContent += row + "\r\n";
+  });
+
+  // Create a link and trigger the download
+  var encodedUri = encodeURI(csvContent);
+  var link = document.createElement("a");
+  link.setAttribute("href", encodedUri);
+  link.setAttribute("download", "chart_data.csv");
+  document.body.appendChild(link);
+  link.click();
+}
