@@ -67,7 +67,7 @@ var tyValues = [];
 for (let i = 0; i < tValues.length; i++) {
   var obj = {};
   obj.x = tValues[i];
-  var C2 = (C0 / 2) * (ERFC((distance - vR * tValues[i]) / (2 * Math.sqrt(DR * tValues[i]))) - (Math.exp(vR * distance / DR)) * (ERFC((distance + vR * tValues[i]) / (2 * Math.sqrt(DR * tValues[i]))))) * (Math.exp((-Math.log(2) / lambda) * tValues[i]));
+  var C2 = (C0 / 2) * (ERFC((distance - vR * tValues[i]) / (2 * Math.sqrt(DR * tValues[i]))) + (Math.exp(vR * distance / DR)) * (ERFC((distance + vR * tValues[i]) / (2 * Math.sqrt(DR * tValues[i]))))) * (Math.exp((-Math.log(2) / lambda) * tValues[i]));
   obj.y = C2.toFixed(2);
   tyValues.push(obj);
 }
