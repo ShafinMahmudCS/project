@@ -10,6 +10,7 @@ function ERFC(value1){
   return 1-math.erf(value1);
 }
 
+// console.log(ERFC(2));
 function expo(x, f) {
   return Number.parseFloat(x).toExponential(f);
 }
@@ -47,7 +48,7 @@ var n = 0.35;
 var v = q / n;
 var R = 1;
 var vR = v / R;
-var alpha = 1;
+var alpha = 5;
 
 var Dstar = 0.0000000001;
 var D = Dstar + (alpha * v);
@@ -68,6 +69,8 @@ for (let i = 0; i < tValues.length; i++) {
   var obj = {};
   obj.x = tValues[i];
   var C2 = (C0 / 2) * (ERFC((distance - vR * tValues[i]) / (2 * Math.sqrt(DR * tValues[i]))) + (Math.exp(vR * distance / DR)) * (ERFC((distance + vR * tValues[i]) / (2 * Math.sqrt(DR * tValues[i]))))) * (Math.exp((-Math.log(2) / lambda) * tValues[i]));
+  console.log(tValues[i], Math.exp((-Math.log(2) / lambda) * tValues[i]));
+
   obj.y = C2.toFixed(2);
   tyValues.push(obj);
 }
@@ -158,7 +161,7 @@ var n = 0.35;
 var v = q/n;
 var R = 1;
 var vR = v/R;
-var alpha = 1;
+var alpha = 5;
 
 var Dstar = 0.0000000001;
 var D =  Dstar + (alpha*v);
@@ -177,7 +180,8 @@ var ctx1 = document.getElementById("canvas1").getContext("2d");
   for(let i =0; i<xValues.length; i++){
     var obj = {};
     obj.x = xValues[i];
-    var C = (C0/2)*(ERFC((xValues[i]-vR*time)/(2*Math.sqrt(DR*time)))-(Math.exp(vR*xValues[i]/DR)*(ERFC((xValues[i]+vR*time)/(2*Math.sqrt(DR*time))))))*(Math.exp(-(Math.log(2)/lambda*time)));
+    var C = (C0/2)*(ERFC((xValues[i]-vR*time)/(2*Math.sqrt(DR*time)))+(Math.exp(vR*xValues[i]/DR)*(ERFC((xValues[i]+vR*time)/(2*Math.sqrt(DR*time))))))*(Math.exp(-(Math.log(2)/lambda*time)));
+  //  console.log((xValues[i]-vR*time)/(2*Math.sqrt(DR*time)));
     obj.y = C.toFixed(2);
     xyValues.push(obj);
   }
@@ -284,7 +288,7 @@ output[5].innerHTML = slider[5].value;
     //initial conditions (without sorption)
     var C0 = parseFloat(slider[0].value);
     var q = parseFloat(slider[1].value);
-    var alpha = 1;
+    var alpha = 5;
   
     var n = 0.35;
     v = q / n;
@@ -303,7 +307,7 @@ output[5].innerHTML = slider[5].value;
     for(let i =0; i<xValues.length; i++){
       var obj = {};
       obj.x = xValues[i];
-      var C = (C0/2)*(ERFC((xValues[i]-vR*time)/(2*Math.sqrt(DR*time)))-(Math.exp(vR*xValues[i]/DR)*(ERFC((xValues[i]+vR*time)/(2*Math.sqrt(DR*time))))))*(Math.exp(-(Math.log(2)/lambda*time)));
+      var C = (C0/2)*(ERFC((xValues[i]-vR*time)/(2*Math.sqrt(DR*time)))+(Math.exp(vR*xValues[i]/DR)*(ERFC((xValues[i]+vR*time)/(2*Math.sqrt(DR*time))))))*(Math.exp(-(Math.log(2)/lambda*time)));
       obj.y = C.toFixed(2);
       xyValues.push(obj);
     }
@@ -396,7 +400,7 @@ output[5].innerHTML = slider[5].value;
     //initial conditions (without sorption)
     var C0 = parseFloat(slider[0].value);
     var q = parseFloat(slider[1].value);
-    var alpha = 1;
+    var alpha = 5;
   
     var n = 0.35;
     var v = q / n;
@@ -415,7 +419,7 @@ output[5].innerHTML = slider[5].value;
   for (let i = 0; i < tValues.length; i++) {
     var obj = {};
     obj.x = tValues[i];
-    var C2 = (C0 / 2) * (ERFC((distance - vR * tValues[i]) / (2 * Math.sqrt(DR * tValues[i]))) - (Math.exp(vR * distance / DR)) * (ERFC((distance + vR * tValues[i]) / (2 * Math.sqrt(DR * tValues[i]))))) * (Math.exp((-Math.log(2) / lambda) * tValues[i]));
+    var C2 = (C0 / 2) * (ERFC((distance - vR * tValues[i]) / (2 * Math.sqrt(DR * tValues[i]))) + (Math.exp(vR * distance / DR)) * (ERFC((distance + vR * tValues[i]) / (2 * Math.sqrt(DR * tValues[i]))))) * (Math.exp((-Math.log(2) / lambda) * tValues[i]));
     obj.y = C2.toFixed(2);
     tyValues.push(obj);
   }
@@ -562,7 +566,7 @@ function downloadExcel1() {
   // Fetch updated slider values
   var C0 = parseFloat(slider[0].value);
   var q = parseFloat(slider[1].value);
-  var alpha = 1;
+  var alpha = 5;
 
   var n = 0.35;
   v = q / n;
@@ -581,7 +585,7 @@ function downloadExcel1() {
   for(let i =0; i<xValues.length; i++){
     var obj = {};
     obj.x = xValues[i];
-    var C = (C0/2)*(ERFC((xValues[i]-vR*time)/(2*Math.sqrt(DR*time)))-(Math.exp(vR*xValues[i]/DR)*(ERFC((xValues[i]+vR*time)/(2*Math.sqrt(DR*time))))))*(Math.exp(-(Math.log(2)/lambda*time)));
+    var C = (C0/2)*(ERFC((xValues[i]-vR*time)/(2*Math.sqrt(DR*time)))+(Math.exp(vR*xValues[i]/DR)*(ERFC((xValues[i]+vR*time)/(2*Math.sqrt(DR*time))))))*(Math.exp(-(Math.log(2)/lambda*time)));
     obj.y = C.toFixed(2);
     xyValues.push(obj);
   }
@@ -614,7 +618,7 @@ function downloadExcel2() {
   // Fetch updated slider values
   var C0 = parseFloat(slider[0].value);
   var q = parseFloat(slider[1].value);
-  var alpha = 1;
+  var alpha = 5;
 
   var n = 0.35;
   var v = q / n;
@@ -633,7 +637,7 @@ var tyValues = [];
 for (let i = 0; i < tValues.length; i++) {
   var obj = {};
   obj.x = tValues[i];
-  var C2 = (C0 / 2) * (ERFC((distance - vR * tValues[i]) / (2 * Math.sqrt(DR * tValues[i]))) - (Math.exp(vR * distance / DR)) * (ERFC((distance + vR * tValues[i]) / (2 * Math.sqrt(DR * tValues[i]))))) * (Math.exp((-Math.log(2) / lambda) * tValues[i]));
+  var C2 = (C0 / 2) * (ERFC((distance - vR * tValues[i]) / (2 * Math.sqrt(DR * tValues[i]))) + (Math.exp(vR * distance / DR)) * (ERFC((distance + vR * tValues[i]) / (2 * Math.sqrt(DR * tValues[i]))))) * (Math.exp((-Math.log(2) / lambda) * tValues[i]));
   obj.y = C2.toFixed(2);
   tyValues.push(obj);
 }
