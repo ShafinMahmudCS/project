@@ -172,6 +172,7 @@ output[4].innerHTML = slider[4].value;
 output[5].innerHTML = slider[5].value;
 output[6].innerHTML = slider[6].value;
 
+
   // Updating Concentration vs Distance graph
 
   function mychart(){
@@ -192,6 +193,7 @@ output[6].innerHTML = slider[6].value;
     var y = parseFloat(slider[4].value); 
     var lambda = parseFloat(slider[5].value); 
     var Dstar = parseFloat(slider[6].value);
+    console.log( Dstar);
 
     q = Q/Area; 
     v = 0.187;

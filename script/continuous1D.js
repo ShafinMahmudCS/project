@@ -5,6 +5,8 @@ var loader = setInterval(function () {
   document.querySelector('.spinner-wrapper').style.display = "none";
 }, 250);
 
+// themeSwitcher = document.querySelector('#darkmode-toggle');
+
 //helper functions
 function ERFC(value1){
   return 1-math.erf(value1);
@@ -152,6 +154,9 @@ var chart2 = new Chart(ctx2,{
   }
 }});
 
+// Chart.defaults.color = '#fff';
+// Chart.defaults.borderColor = 'rgba(255, 255, 255, 0.1)';
+
 // Initial Concentration vs Distance graph on page load
 var C0 = 25;
 
@@ -264,6 +269,21 @@ var chart1 = new Chart(ctx1,{
   }
 }});
 
+themeSwitcher = document.querySelector('#darkmode-toggle');
+themeSwitcher.addEventListener('click', function () {
+  if(document.body.classList.contains('light-theme')){
+Chart.defaults.color = 'rgba(255, 255, 255, 0.8)';
+Chart.defaults.borderColor = 'rgba(255, 255, 255, 0.1)';
+mychart()
+mychart2()
+  }else{
+    Chart.defaults.color = 'rgba(0, 0, 0, 0.65)';
+Chart.defaults.borderColor = 'rgba(0, 0, 0, 0.15)';
+mychart()
+mychart2()
+  }
+})
+
 
 var str; 
 
@@ -271,6 +291,9 @@ var slider = document.querySelectorAll(".slider"); // all the sliders from HTML
 var output = document.querySelectorAll(".demo");  // all the output fields from HTML
 var myTime = document.querySelector(".myTime");
 
+
+console.log(slider);
+console.log(slider[0].value);
 output[0].innerHTML = slider[0].value;
 output[1].innerHTML = slider[1].value + " m/day, Pore water velocity (v) : " + v.toFixed(2) + " m/day";
 output[2].innerHTML = slider[2].value;
@@ -278,6 +301,8 @@ output[3].innerHTML = slider[3].value;
 myTime.innerHTML = slider[3].value;
 output[4].innerHTML = slider[4].value;
 output[5].innerHTML = slider[5].value;
+output[6].innerHTML = slider[6].value;
+console.log(output[6]);
 
 // Updating Concentration vs Distance graph
 
@@ -288,13 +313,14 @@ output[5].innerHTML = slider[5].value;
     //initial conditions (without sorption)
     var C0 = parseFloat(slider[0].value);
     var q = parseFloat(slider[1].value);
-    var alpha = 5;
+    var alpha = parseFloat(slider[2].value);
   
     var n = 0.35;
     v = q / n;
     var R = parseFloat(slider[4].value);
     var vR = v / R;
-    var Dstar = parseFloat(slider[2].value);
+    var Dstar = parseFloat(slider[6].value);
+    console.log(Dstar);
     var D = Dstar + (alpha * v);
     var DR = D / R;
     var time = parseFloat(slider[3].value);
@@ -389,7 +415,7 @@ output[5].innerHTML = slider[5].value;
     }
   }});
   $(document).scrollTop(pos);
-  }
+}
 
   // Updating Concentration vs Time graph
 
@@ -400,13 +426,13 @@ output[5].innerHTML = slider[5].value;
     //initial conditions (without sorption)
     var C0 = parseFloat(slider[0].value);
     var q = parseFloat(slider[1].value);
-    var alpha = 5;
+    var alpha = parseFloat(slider[2].value);;
   
     var n = 0.35;
     var v = q / n;
     var R = parseFloat(slider[4].value);
     var vR = v / R;
-    var Dstar = parseFloat(slider[2].value);
+    var Dstar = parseFloat(slider[6].value);
     var D = Dstar + (alpha * v);
     var DR = D / R;
     var distance = parseFloat(slider[3].value);
@@ -541,6 +567,12 @@ slider[5].oninput = function() {
  mychart2();
 output[5].innerHTML = slider[5].value;
   }
+
+  slider[6].oninput = function() {
+    mychart();
+    mychart2();
+   output[6].innerHTML = slider[6].value;
+     }
             
 
   //button
