@@ -307,6 +307,7 @@ myTime.innerHTML = slider[2].value;
 output[4].innerHTML = slider[4].value;
 output[5].innerHTML = slider[5].value;
 output[6].innerHTML = slider[6].value;
+output[7].innerHTML = slider[7].value;
 
 console.log('my', slider[2].value);
 
@@ -322,7 +323,7 @@ console.log('my', slider[2].value);
     var n = 0.35;
     var q = slider[1].value;
     var Dstar = parseFloat(slider[6].value) * 86400;
-    var alphaX = 5;
+    var alphaX = slider[7].value;
     var R = slider[4].value;
     var v = q/n;
     var DL =  Dstar + (alphaX*v);
@@ -445,7 +446,7 @@ console.log('my', slider[2].value);
   
   var Dstar = parseFloat(slider[6].value) * 86400;
 
-var alphaX = 5;
+var alphaX = slider[7].value;
 var DL =  Dstar + (alphaX*v);
 var DR = DL/R;
 
@@ -587,6 +588,13 @@ slider[6].oninput = function() {
 mychart2();
 output[6].innerHTML = slider[6].value;
   }
+
+  slider[7].oninput = function() {
+    mychart();
+   mychart2();
+   output[7].innerHTML = slider[7].value;
+     }
+   
 
   //button
   $(".btn").mousedown(function(){
