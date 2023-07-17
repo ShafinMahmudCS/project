@@ -44,7 +44,7 @@ var  m = 1000;
 var Area = 1;
 var n = 0.35;
 var q = 0.08;
-var Dstar = 0.00000864;
+var Dstar = 0.00000864 * 86400;
 var alphaX = 5;
 var R = 1;
 var v = q/n;
@@ -71,6 +71,13 @@ for(let i =0; i<tValues.length; i++){
   var C = a1*Math.exp(a2)*Math.exp(-Math.log(2)/lambda*tValues[i]);
   obj.y = C;
   tyValues.push(obj);
+}
+
+Chart.defaults.color = 'rgba(0, 0, 0, 0.65)';
+Chart.defaults.borderColor = 'rgba(0, 0, 0, 0.15)';
+if (document.body.classList.contains('dark-theme')) {
+  Chart.defaults.color = 'rgba(255, 255, 255, 0.8)';
+  Chart.defaults.borderColor = 'rgba(255, 255, 255, 0.1)';
 }
 
 var chart2 = new Chart(ctx2,{
@@ -156,7 +163,7 @@ var  m = 1000;
 var Area = 1;
 var n = 0.35;
 var q = 0.08;
-var Dstar = 0.00000864;
+var Dstar = 0.00000864 * 86400;
 var alphaX = 5;
 var R = 1;
 var v = q/n;
@@ -186,6 +193,12 @@ for(let i =0; i<xValues.length; i++){
   xyValues.push(obj);
 }
 
+Chart.defaults.color = 'rgba(0, 0, 0, 0.65)';
+Chart.defaults.borderColor = 'rgba(0, 0, 0, 0.15)';
+if (document.body.classList.contains('dark-theme')) {
+  Chart.defaults.color = 'rgba(255, 255, 255, 0.8)';
+  Chart.defaults.borderColor = 'rgba(255, 255, 255, 0.1)';
+}
 
 var chart1 = new Chart(ctx1,{
   type: 'scatter',
@@ -264,6 +277,21 @@ var chart1 = new Chart(ctx1,{
   }
 }});
 
+themeSwitcher = document.querySelector('#darkmode-toggle');
+themeSwitcher.addEventListener('click', function () {
+  if(document.body.classList.contains('light-theme')){
+    Chart.defaults.color = 'rgba(255, 255, 255, 0.8)';
+    Chart.defaults.borderColor = 'rgba(255, 255, 255, 0.1)';
+    mychart()
+    mychart2()
+  }else{
+    Chart.defaults.color = 'rgba(0, 0, 0, 0.65)';
+    Chart.defaults.borderColor = 'rgba(0, 0, 0, 0.15)';
+    mychart()
+    mychart2()
+  }
+})
+
 
 var str; 
 
@@ -280,6 +308,8 @@ output[4].innerHTML = slider[4].value;
 output[5].innerHTML = slider[5].value;
 output[6].innerHTML = slider[6].value;
 
+console.log('my', slider[2].value);
+
 // Updating Concentration vs Distance graph
 
   function mychart(){
@@ -291,7 +321,7 @@ output[6].innerHTML = slider[6].value;
     var Area = slider[3].value;
     var n = 0.35;
     var q = slider[1].value;
-    var Dstar = parseFloat(slider[6].value);
+    var Dstar = parseFloat(slider[6].value) * 86400;
     var alphaX = 5;
     var R = slider[4].value;
     var v = q/n;
@@ -413,7 +443,7 @@ output[6].innerHTML = slider[6].value;
   var lambda = slider[5].value;
   var vR = v/R;
   
-  var Dstar = parseFloat(slider[6].value);
+  var Dstar = parseFloat(slider[6].value) * 86400;
 
 var alphaX = 5;
 var DL =  Dstar + (alphaX*v);
@@ -531,13 +561,13 @@ slider[2].oninput = function() {
  mychart();
 mychart2();
 output[2].innerHTML = slider[2].value;
+myTime.innerHTML = slider[2].value;
   }
 
 slider[3].oninput = function() {
  mychart();
 mychart2();
  output[3].innerHTML = slider[3].value;
- myTime.innerHTML = slider[3].value;
   }
 
 slider[4].oninput = function() {
@@ -583,7 +613,7 @@ function downloadExcel1() {
   var Area = slider[3].value;
   var n = 0.35;
   var q = slider[1].value;
-  var Dstar = parseFloat(slider[6].value);
+  var Dstar = parseFloat(slider[6].value) * 86400;
   var alphaX = 5;
   var R = slider[4].value;
   var v = q/n;
@@ -645,7 +675,7 @@ function downloadExcel2() {
   var lambda = slider[5].value;
   var vR = v/R;
   
-  var Dstar = parseFloat(slider[6].value);
+  var Dstar = parseFloat(slider[6].value) * 86400;
 
 var alphaX = 5;
 var DL =  Dstar + (alphaX*v);

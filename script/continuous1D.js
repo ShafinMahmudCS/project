@@ -52,7 +52,7 @@ var R = 1;
 var vR = v / R;
 var alpha = 5;
 
-var Dstar = 0.0000000001;
+var Dstar = 0.00000864 * 86400;
 var D = Dstar + (alpha * v);
 
 var DR = D / R;
@@ -75,6 +75,13 @@ for (let i = 0; i < tValues.length; i++) {
 
   obj.y = C2.toFixed(2);
   tyValues.push(obj);
+}
+
+Chart.defaults.color = 'rgba(0, 0, 0, 0.65)';
+Chart.defaults.borderColor = 'rgba(0, 0, 0, 0.15)';
+if (document.body.classList.contains('dark-theme')) {
+  Chart.defaults.color = 'rgba(255, 255, 255, 0.8)';
+  Chart.defaults.borderColor = 'rgba(255, 255, 255, 0.1)';
 }
 
 var chart2 = new Chart(ctx2,{
@@ -168,7 +175,7 @@ var R = 1;
 var vR = v/R;
 var alpha = 5;
 
-var Dstar = 0.0000000001;
+var Dstar = 0.00000864 * 86400;
 var D =  Dstar + (alpha*v);
 
 var DR = D/R;
@@ -192,7 +199,14 @@ var ctx1 = document.getElementById("canvas1").getContext("2d");
   }
 
 
-var chart1 = new Chart(ctx1,{
+    Chart.defaults.color = 'rgba(0, 0, 0, 0.65)';
+    Chart.defaults.borderColor = 'rgba(0, 0, 0, 0.15)';
+    if (document.body.classList.contains('dark-theme')) {
+      Chart.defaults.color = 'rgba(255, 255, 255, 0.8)';
+      Chart.defaults.borderColor = 'rgba(255, 255, 255, 0.1)';
+    }
+
+  var chart1 = new Chart(ctx1,{
   type: 'scatter',
   data: {
     datasets: [{
@@ -272,15 +286,15 @@ var chart1 = new Chart(ctx1,{
 themeSwitcher = document.querySelector('#darkmode-toggle');
 themeSwitcher.addEventListener('click', function () {
   if(document.body.classList.contains('light-theme')){
-Chart.defaults.color = 'rgba(255, 255, 255, 0.8)';
-Chart.defaults.borderColor = 'rgba(255, 255, 255, 0.1)';
-mychart()
-mychart2()
+    Chart.defaults.color = 'rgba(255, 255, 255, 0.8)';
+    Chart.defaults.borderColor = 'rgba(255, 255, 255, 0.1)';
+    mychart()
+    mychart2()
   }else{
     Chart.defaults.color = 'rgba(0, 0, 0, 0.65)';
-Chart.defaults.borderColor = 'rgba(0, 0, 0, 0.15)';
-mychart()
-mychart2()
+    Chart.defaults.borderColor = 'rgba(0, 0, 0, 0.15)';
+    mychart()
+    mychart2()
   }
 })
 
@@ -319,7 +333,7 @@ console.log(output[6]);
     v = q / n;
     var R = parseFloat(slider[4].value);
     var vR = v / R;
-    var Dstar = parseFloat(slider[6].value);
+    var Dstar = parseFloat(slider[6].value) * 86400;
     console.log(Dstar);
     var D = Dstar + (alpha * v);
     var DR = D / R;
@@ -432,7 +446,7 @@ console.log(output[6]);
     var v = q / n;
     var R = parseFloat(slider[4].value);
     var vR = v / R;
-    var Dstar = parseFloat(slider[6].value);
+    var Dstar = parseFloat(slider[6].value) * 86400;
     var D = Dstar + (alpha * v);
     var DR = D / R;
     var distance = parseFloat(slider[3].value);
@@ -604,7 +618,7 @@ function downloadExcel1() {
   v = q / n;
   var R = parseFloat(slider[4].value);
   var vR = v / R;
-  var Dstar = parseFloat(slider[2].value);
+  var Dstar = parseFloat(slider[2].value) * 86400;
   var D = Dstar + (alpha * v);
   var DR = D / R;
   var time = parseFloat(slider[3].value);
@@ -656,7 +670,7 @@ function downloadExcel2() {
   var v = q / n;
   var R = parseFloat(slider[4].value);
   var vR = v / R;
-  var Dstar = parseFloat(slider[2].value);
+  var Dstar = parseFloat(slider[2].value) * 86400;
   var D = Dstar + (alpha * v);
   var DR = D / R;
   var distance = parseFloat(slider[3].value);

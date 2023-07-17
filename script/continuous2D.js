@@ -45,7 +45,7 @@ var Area = 20;
 var n = 0.35;
 var q = Q/Area; 
 var v = 0.187;
-var Dstar = 0.00000864; 
+var Dstar = 0.00000864 * 86400; 
 var alphaX = 4.919;
 var alphaY = 0.4919;
 var DL = (alphaX*v) + Dstar;
@@ -77,6 +77,12 @@ var ctx1 = document.getElementById("canvas1").getContext("2d");
     xyValues.push(obj);
   }
 
+  Chart.defaults.color = 'rgba(0, 0, 0, 0.65)';
+  Chart.defaults.borderColor = 'rgba(0, 0, 0, 0.15)';
+  if (document.body.classList.contains('dark-theme')) {
+    Chart.defaults.color = 'rgba(255, 255, 255, 0.8)';
+    Chart.defaults.borderColor = 'rgba(255, 255, 255, 0.1)';
+  }
 
 var chart1 = new Chart(ctx1,{
   type: 'scatter',
@@ -155,7 +161,20 @@ var chart1 = new Chart(ctx1,{
   }
 }});
 
-
+themeSwitcher = document.querySelector('#darkmode-toggle');
+themeSwitcher.addEventListener('click', function () {
+  if(document.body.classList.contains('light-theme')){
+    Chart.defaults.color = 'rgba(255, 255, 255, 0.8)';
+    Chart.defaults.borderColor = 'rgba(255, 255, 255, 0.1)';
+    mychart()
+    mychart2()
+  }else{
+    Chart.defaults.color = 'rgba(0, 0, 0, 0.65)';
+    Chart.defaults.borderColor = 'rgba(0, 0, 0, 0.15)';
+    mychart()
+    mychart2()
+  }
+})
 
 var str; 
 
@@ -192,7 +211,7 @@ output[6].innerHTML = slider[6].value;
     var b = parseFloat(slider[3].value); 
     var y = parseFloat(slider[4].value); 
     var lambda = parseFloat(slider[5].value); 
-    var Dstar = parseFloat(slider[6].value);
+    var Dstar = parseFloat(slider[6].value) * 86400;
     console.log( Dstar);
 
     q = Q/Area; 
@@ -367,19 +386,19 @@ function downloadExcel() {
   var alphaY = 0.4919;
 
   var c = parseFloat(slider[0].value);
-  console.log(slider[0].value);
+
   var Q = parseFloat(slider[1].value);
-  console.log(slider[1].value);
+
   var R = parseFloat(slider[2].value);
-  console.log(slider[2].value);  
+
   var b = parseFloat(slider[3].value); 
-  console.log(slider[3].value);
+
   var y = parseFloat(slider[4].value); 
-  console.log(slider[4].value);
+
   var lambda = parseFloat(slider[5].value); 
-  console.log(slider[5].value);
-  var Dstar = parseFloat(slider[6].value);
-  console.log(slider[6].value);
+
+  var Dstar = parseFloat(slider[6].value) * 86400;
+
 
   q = Q/Area; 
   v = 0.187;

@@ -34,6 +34,11 @@
     </div>
 
     <div id="top">
+      <input type="checkbox" id="darkmode-toggle"/>
+      <label id="toggleLabel" for="darkmode-toggle">
+        <img src="./images/sun.svg" class="sun" />
+        <img src="./images/moon.svg" class="moon" />
+      </label>
       <a id="header" href="index.html"
         ><h1>Subsurface Transport Visualization Tool</h1></a
       >
@@ -51,7 +56,7 @@
     <div class="container">
       <div class="slidecontainer">
         <p>
-          <b>Concentration (c) : <span class="demo"></span> mg/L</b>
+          Concentration (C) : <span class="demo"></span> mg/L
         </p>
 
         <input
@@ -67,7 +72,7 @@
 
       <div class="slidecontainer2">
         <p>
-          <b>Darcy velocity (q): <span class="demo"></span></b>
+          Darcy velocity (q): <span class="demo"></span>
         </p>
 
         <input
@@ -85,18 +90,18 @@
     <div class="container">
       <div class="slidecontainer3">
         <p>
-          <b>
+          
             Effective diffusion coefficient (D*):
-            <span class="demo"></span> m<sup>2</sup>/day
-          </b>
+            <span class="demo"></span> m<sup>2</sup>/s
+          
         </p>
 
         <input
           type="range"
           min="0.0000000000"
-          max="0.3000000000"
-          value="0.0000000001"
-          step="0.0000000001"
+          max="0.0050000000"
+          value="0.00000864"
+          step="0.00000001"
           class="slider"
           id="myRange"
         />
@@ -104,19 +109,19 @@
 
       <div class="slidecontainer4">
         <p>
-          <b>
-            <span class="blue">Distance (x):</span>
-            <span class="demo"></span> day(s)/
-            <span class="pink">Time (t):</span>
-            <span class="myTime"></span> m
-          </b>
+          
+          <span class="blue">Time (t):</span> <span class="demo"></span> day
+          (s)/
+          <span class="pink">Distance (x):</span>
+          <span class="myTime"></span> m
+          
         </p>
 
         <input
           type="range"
           min="1"
           max="100"
-          value="22"
+          value="20"
           class="slider"
           id="myRange"
         />
@@ -126,13 +131,13 @@
     <div class="container">
       <div class="slidecontainer5">
         <p>
-          <b>y: <span class="demo"></span> m</b>
+          y: <span class="demo"></span> m
         </p>
 
         <input
           type="range"
           min="0"
-          max="12"
+          max="20"
           value="5"
           class="slider"
           id="myRange"
@@ -141,7 +146,7 @@
 
       <div class="slidecontainer6">
         <p>
-          <b>Area (a): <span class="demo"></span> m<sup>2</sup></b>
+          Area (A): <span class="demo"></span> m<sup>2</sup>
         </p>
 
         <input
@@ -158,7 +163,7 @@
     <div class="container">
       <div class="slidecontainer7">
         <p>
-          <b>Retardation factor (R) : <span class="demo"></span></b>
+          Retardation factor (R) : <span class="demo"></span>
         </p>
 
         <input
@@ -174,14 +179,14 @@
 
       <div class="slidecontainer8">
         <p>
-          <b>Half-life (&lambda;): <span class="demo"></span> day(s)</b>
+          Half-life (&lambda;): <span class="demo"></span> day(s)
         </p>
 
         <input
           type="range"
           min="0"
           max="1000"
-          value="1"
+          value="1000"
           class="slider"
           id="myRange"
         />
@@ -231,7 +236,7 @@
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
     ></script>
-
+    <script src="./script/theme.js"></script>
     <script src="./script/slug2D.js"></script>
   </body>
 </html>

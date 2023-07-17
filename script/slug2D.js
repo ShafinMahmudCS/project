@@ -46,7 +46,7 @@ var v = q/n;
 var R = 1;
 var vR = v/R;
 
-var Dstar = 0.0000000001;
+var Dstar = 0.00000864 * 86400;
 var alphaX = 1;
 var alphaY = 0.1;
 var DL =  Dstar + (alphaX*v);
@@ -54,9 +54,9 @@ var Dt = Dstar + (alphaY*v);
 var DLR = DL/R;
 var DtR = Dt/R;
 
-var lambda = 1;
+var lambda = 1000;
 
-var x = 22;
+var x = 20;
 var y = 5;
 var Area = 5;
 
@@ -72,6 +72,13 @@ for(let i =0; i<tValues.length; i++){
   var C = C0*Area/(4*(Math.PI)*tValues[i]*Math.sqrt(DtR*DLR))*Math.exp(-((x-vR*tValues[i])**2)/(4*DLR*tValues[i])-y**2/(4*DtR*tValues[i]))*(Math.exp(-(Math.log(2)/lambda*tValues[i])));
   obj.y = C;
   tyValues.push(obj);
+}
+
+Chart.defaults.color = 'rgba(0, 0, 0, 0.65)';
+Chart.defaults.borderColor = 'rgba(0, 0, 0, 0.15)';
+if (document.body.classList.contains('dark-theme')) {
+  Chart.defaults.color = 'rgba(255, 255, 255, 0.8)';
+  Chart.defaults.borderColor = 'rgba(255, 255, 255, 0.1)';
 }
 
 var chart2 = new Chart(ctx2,{
@@ -160,7 +167,7 @@ var v = q/n;
 var R = 1;
 var vR = v/R;
 
-var Dstar = 0.0000000001;
+var Dstar = 0.00000864 * 86400;
 var alphaX = 1;
 var alphaY = 0.1;
 var DL =  Dstar + (alphaX*v);
@@ -168,10 +175,10 @@ var Dt = Dstar + (alphaY*v);
 var DLR = DL/R;
 var DtR = Dt/R;
 var time = 20;
-var lambda = 1;
+var lambda = 1000;
 
 var x = 75;
-var y = 20;
+var y = 5;
 var Area = 5;
 
 var ctx1 = document.getElementById("canvas1").getContext("2d");
@@ -186,6 +193,13 @@ for(let i =0; i<xValues.length; i++){
   var C = C0*Area/(4*(Math.PI)*time*Math.sqrt(DtR*DLR))*Math.exp(-((xValues[i]-vR*time)**2)/(4*DLR*time)-y**2/(4*DtR*time))*(Math.exp(-(Math.log(2)/lambda*time)));
   obj.y = expo(C, 7);
   xyValues.push(obj);
+}
+
+Chart.defaults.color = 'rgba(0, 0, 0, 0.65)';
+Chart.defaults.borderColor = 'rgba(0, 0, 0, 0.15)';
+if (document.body.classList.contains('dark-theme')) {
+  Chart.defaults.color = 'rgba(255, 255, 255, 0.8)';
+  Chart.defaults.borderColor = 'rgba(255, 255, 255, 0.1)';
 }
 
 
@@ -266,6 +280,20 @@ var chart1 = new Chart(ctx1,{
   }
 }});
 
+themeSwitcher = document.querySelector('#darkmode-toggle');
+themeSwitcher.addEventListener('click', function () {
+  if(document.body.classList.contains('light-theme')){
+    Chart.defaults.color = 'rgba(255, 255, 255, 0.8)';
+    Chart.defaults.borderColor = 'rgba(255, 255, 255, 0.1)';
+    mychart()
+    mychart2()
+  }else{
+    Chart.defaults.color = 'rgba(0, 0, 0, 0.65)';
+    Chart.defaults.borderColor = 'rgba(0, 0, 0, 0.15)';
+    mychart()
+    mychart2()
+  }
+})
 
 var str; 
 
@@ -297,7 +325,7 @@ output[7].innerHTML = slider[7].value;
     var R = slider[6].value;
     var vR = v/R;
     
-    var Dstar = parseFloat(slider[2].value);
+    var Dstar = parseFloat(slider[2].value) * 86400;
     var alphaX = 1;
     var alphaY = 0.1;
     var DL =  Dstar + (alphaX*v);
@@ -306,6 +334,8 @@ output[7].innerHTML = slider[7].value;
     var DtR = Dt/R;
     var time = slider[3].value;
     var lambda = slider[7].value;
+
+    console.log('7', slider[7].value);
     
     var x = 75;
     var y = slider[4].value;
@@ -416,7 +446,7 @@ output[7].innerHTML = slider[7].value;
   var R = slider[6].value;
   var vR = v/R;
   
-  var Dstar = parseFloat(slider[2].value);
+  var Dstar = parseFloat(slider[2].value) * 86400;
   var alphaX = 1;
   var alphaY = 0.1;
   var DL =  Dstar + (alphaX*v);
@@ -425,6 +455,7 @@ output[7].innerHTML = slider[7].value;
   var DtR = Dt/R;
   var x = slider[3].value;
   var lambda = slider[7].value;
+  console.log('72', slider[7].value);
   
   var y = slider[4].value;
   var Area = slider[5].value;
@@ -599,7 +630,7 @@ function downloadExcel1() {
   var R = slider[6].value;
   var vR = v/R;
   
-  var Dstar = parseFloat(slider[2].value);
+  var Dstar = parseFloat(slider[2].value) * 86400;
   var alphaX = 1;
   var alphaY = 0.1;
   var DL =  Dstar + (alphaX*v);
@@ -658,7 +689,7 @@ function downloadExcel2() {
   var R = slider[6].value;
   var vR = v/R;
   
-  var Dstar = parseFloat(slider[2].value);
+  var Dstar = parseFloat(slider[2].value) * 86400;
   var alphaX = 1;
   var alphaY = 0.1;
   var DL =  Dstar + (alphaX*v);

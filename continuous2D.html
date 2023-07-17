@@ -39,6 +39,11 @@
     </div>
 
     <div id="top">
+      <input type="checkbox" id="darkmode-toggle"/>
+      <label id="toggleLabel" for="darkmode-toggle">
+        <img src="./images/sun.svg" class="sun" />
+        <img src="./images/moon.svg" class="moon" />
+      </label>
       <a id="header" href="index.html"
         ><h1>Subsurface Transport Visualization Tool</h1></a
       >
@@ -56,7 +61,7 @@
     <div class="container">
       <div class="slidecontainer">
         <p>
-          <b>Concentration (c) : <span class="demo"></span> mg/L</b>
+          Concentration (c) : <span class="demo"></span> mg/L
         </p>
 
         <input
@@ -71,10 +76,10 @@
 
       <div class="slidecontainer2">
         <p>
-          <b
-            >Flow rate (Q): <span class="demo"></span> m<sup>3</sup>/day,
+          
+            Flow rate (Q): <span class="demo"></span> m<sup>3</sup>/day,
             <span class="flow"></span
-          ></b>
+          >
         </p>
 
         <input
@@ -92,7 +97,7 @@
     <div class="container">
       <div class="slidecontainer3">
         <p>
-          <b>Retardation factor (R) : <span class="demo"></span></b>
+          Retardation factor (R) : <span class="demo"></span>
         </p>
 
         <input
@@ -108,7 +113,7 @@
 
       <div class="slidecontainer4">
         <p>
-          <b>Aquifer thickness (b): <span class="demo"></span> m</b>
+          Aquifer thickness (b): <span class="demo"></span> m
         </p>
 
         <input
@@ -126,7 +131,7 @@
     <div class="container">
       <div class="slidecontainer5">
         <p>
-          <b>y: <span class="demo"></span> m</b>
+          y: <span class="demo"></span> m
         </p>
 
         <input
@@ -141,7 +146,7 @@
 
       <div class="slidecontainer6">
         <p>
-          <b>Half-life (&lambda;): <span class="demo"></span> day(s)</b>
+          Half-life (&lambda;): <span class="demo"></span> day(s)
         </p>
 
         <input
@@ -158,16 +163,16 @@
     <div class="diffContainer">
       <div class="slidecontainer1D">
         <p>
-          <b>
+          
             Effective diffusion coefficient (D*):
-            <span class="demo"></span> m<sup>2</sup>/day
-          </b>
+            <span class="demo"></span> m<sup>2</sup>/s
+          
         </p>
 
         <input
           type="range"
           min="0.00000000"
-          max="1.00000000"
+          max="0.00100000"
           value="0.00000864"
           step="0.00000001"
           class="slider"
@@ -212,7 +217,7 @@
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
     ></script>
-
+    <script src="./script/theme.js"></script>
     <script src="./script/continuous2D.js"></script>
   </body>
 </html>

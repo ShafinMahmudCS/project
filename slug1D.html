@@ -34,6 +34,11 @@
     </div>
 
     <div id="top">
+      <input type="checkbox" id="darkmode-toggle"/>
+      <label id="toggleLabel" for="darkmode-toggle">
+        <img src="./images/sun.svg" class="sun" />
+        <img src="./images/moon.svg" class="moon" />
+      </label>
       <a id="header" href="index.html"
         ><h1>Subsurface Transport Visualization Tool</h1></a
       >
@@ -50,7 +55,7 @@
     <div class="container">
       <div class="slidecontainer">
         <p>
-          <b>Mass (M) : <span class="demo"></span> Kg</b>
+          Mass (M) : <span class="demo"></span> Kg
         </p>
 
         <input
@@ -66,7 +71,7 @@
 
       <div class="slidecontainer2">
         <p>
-          <b>Darcy velocity (q): <span class="demo"></span></b>
+          Darcy velocity (q): <span class="demo"></span>
         </p>
 
         <input
@@ -84,12 +89,12 @@
     <div class="container">
       <div class="slidecontainer4">
         <p>
-          <b>
-            <span class="blue">Distance (x):</span>
-            <span class="demo"></span> day(s)/
-            <span class="pink">Time (t):</span>
-            <span class="myTime"></span> m
-          </b>
+          
+          <span class="blue">Time (t):</span> <span class="demo"></span> day
+          (s)/
+          <span class="pink">Distance (x):</span>
+          <span class="myTime"></span> m
+          
         </p>
 
         <input
@@ -104,7 +109,7 @@
 
       <div class="slidecontainer6">
         <p>
-          <b>Area (a): <span class="demo"></span> m<sup>2</sup></b>
+          Area (a): <span class="demo"></span> m<sup>2</sup>
         </p>
 
         <input
@@ -121,7 +126,7 @@
     <div class="container">
       <div class="slidecontainer7">
         <p>
-          <b>Retardation factor (R) : <span class="demo"></span></b>
+          Retardation factor (R) : <span class="demo"></span>
         </p>
 
         <input
@@ -137,7 +142,7 @@
 
       <div class="slidecontainer8">
         <p>
-          <b>Half-life (&lambda;): <span class="demo"></span> day(s)</b>
+          Half-life (&lambda;): <span class="demo"></span> day(s)
         </p>
 
         <input
@@ -154,16 +159,16 @@
     <div class="diffContainer">
       <div class="slidecontainer1D">
         <p>
-          <b>
+          
             Effective diffusion coefficient (D*):
-            <span class="demo"></span> m<sup>2</sup>/day
-          </b>
+            <span class="demo"></span> m<sup>2</sup>/s
+          
         </p>
 
         <input
           type="range"
           min="0.00000000"
-          max="1.00000000"
+          max="0.00500000"
           value="0.00000864"
           step="0.00000001"
           class="slider"
@@ -215,7 +220,7 @@
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
     ></script>
-
+    <script src="./script/theme.js"></script>
     <script src="./script/slug1D.js"></script>
   </body>
 </html>
