@@ -190,6 +190,8 @@ output[3].innerHTML = slider[3].value;
 output[4].innerHTML = slider[4].value;
 output[5].innerHTML = slider[5].value;
 output[6].innerHTML = slider[6].value;
+output[7].innerHTML = slider[7].value;
+output[8].innerHTML = slider[8].value;
 
 
   // Updating Concentration vs Distance graph
@@ -202,8 +204,8 @@ output[6].innerHTML = slider[6].value;
     var Area = 20; // area constant cause area not in equation
     var n = 0.35;
 
-    var alphaX = 4.919;
-    var alphaY = 0.4919;
+    var alphaX = parseFloat(slider[7].value);
+    var alphaY = parseFloat(slider[6].value);
 
     var c = parseFloat(slider[0].value);
     var Q = parseFloat(slider[1].value);
@@ -211,8 +213,9 @@ output[6].innerHTML = slider[6].value;
     var b = parseFloat(slider[3].value); 
     var y = parseFloat(slider[4].value); 
     var lambda = parseFloat(slider[5].value); 
-    var Dstar = parseFloat(slider[6].value) * 86400;
+    var Dstar = parseFloat(slider[8].value) * 86400;
     console.log( Dstar);
+  
 
     q = Q/Area; 
     v = 0.187;
@@ -358,6 +361,18 @@ slider[6].oninput = function() {
   output[6].innerHTML = slider[6].value;
     }
 
+    slider[7].oninput = function() {
+      mychart();
+    
+      output[7].innerHTML = slider[7].value;
+        }
+
+        slider[8].oninput = function() {
+          mychart();
+        
+          output[8].innerHTML = slider[8].value;
+            }
+
   //button
   $(".btn").mousedown(function(){
     $(this).addClass("pressed");
@@ -382,8 +397,8 @@ function downloadExcel() {
   var Area = 20; // area constant cause area not in equation
   var n = 0.35;
 
-  var alphaX = 4.919;
-  var alphaY = 0.4919;
+  var alphaX = parseFloat(slider[7].value);
+  var alphaY = parseFloat(slider[6].value);
 
   var c = parseFloat(slider[0].value);
 
@@ -397,7 +412,7 @@ function downloadExcel() {
 
   var lambda = parseFloat(slider[5].value); 
 
-  var Dstar = parseFloat(slider[6].value) * 86400;
+  var Dstar = parseFloat(slider[8].value) * 86400;
 
 
   q = Q/Area; 

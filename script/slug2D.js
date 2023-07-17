@@ -310,6 +310,8 @@ output[4].innerHTML = slider[4].value;
 output[5].innerHTML = slider[5].value;
 output[6].innerHTML = slider[6].value;
 output[7].innerHTML = slider[7].value;
+output[8].innerHTML = slider[8].value;
+output[9].innerHTML = slider[9].value;
  
 // Updating Concentration vs Distance graph
 
@@ -326,8 +328,8 @@ output[7].innerHTML = slider[7].value;
     var vR = v/R;
     
     var Dstar = parseFloat(slider[2].value) * 86400;
-    var alphaX = 1;
-    var alphaY = 0.1;
+    var alphaX = slider[9].value;
+    var alphaY = slider[8].value;
     var DL =  Dstar + (alphaX*v);
     var Dt = Dstar + (alphaY*v);
     var DLR = DL/R;
@@ -447,8 +449,8 @@ output[7].innerHTML = slider[7].value;
   var vR = v/R;
   
   var Dstar = parseFloat(slider[2].value) * 86400;
-  var alphaX = 1;
-  var alphaY = 0.1;
+  var alphaX = slider[9].value;
+  var alphaY = slider[8].value;
   var DL =  Dstar + (alphaX*v);
   var Dt = Dstar + (alphaY*v);
   var DLR = DL/R;
@@ -601,6 +603,18 @@ slider[7].oninput = function() {
  mychart2();
 output[7].innerHTML = slider[7].value;
   }
+
+  slider[8].oninput = function() {
+    mychart();
+    mychart2();
+   output[8].innerHTML = slider[8].value;
+     }
+
+     slider[9].oninput = function() {
+      mychart();
+      mychart2();
+     output[9].innerHTML = slider[9].value;
+       }
 
   //button
   $(".btn").mousedown(function(){
