@@ -429,6 +429,28 @@ h2 {
   width: 100%;
 }
 
+.myCanvas {
+  position: relative;
+}
+
+.canvas-info p{
+  margin: 0;
+  padding: 0;
+}
+
+
+.canvas-info {
+  position: absolute;
+  width: 8rem;
+  height: 20px;
+  top: 0.7rem;
+  right: 0.1rem;
+  padding: 5px;
+  background: transparent;
+  border-radius: 5px;
+  font-size: 14px;
+}
+
 nav {
   display: flex;
   align-items: center;

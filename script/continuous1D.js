@@ -316,6 +316,8 @@ myTime.innerHTML = slider[3].value;
 output[4].innerHTML = slider[4].value;
 output[5].innerHTML = slider[5].value;
 output[6].innerHTML = slider[6].value;
+output[7].innerHTML = slider[3].value;
+output[8].innerHTML = slider[3].value;
 console.log(output[6]);
 
 // Updating Concentration vs Distance graph
@@ -351,6 +353,16 @@ console.log(output[6]);
       obj.y = C.toFixed(2);
       xyValues.push(obj);
     }
+
+    let yValues = xyValues.map(obj => parseFloat(obj.y));
+    let minY = 0;
+    let maxY = Math.floor((Math.max(...yValues) + 5));
+    
+    if (maxY <= 35) {
+      maxY = 35;
+    }else if (maxY > 1000) {
+      maxY = 1000;
+    }
   
   chart1 = new Chart(ctx1,{
     type: 'scatter',
@@ -382,8 +394,8 @@ console.log(output[6]);
         }
         },
         y:{
-          min: 0,
-          max: 35.0,
+          min: minY,
+          max: maxY,
           position: 'left',
           title: {
             display: true,
@@ -463,6 +475,16 @@ console.log(output[6]);
     obj.y = C2.toFixed(2);
     tyValues.push(obj);
   }
+
+  let yValues = tyValues.map(obj => parseFloat(obj.y));
+  let minY = 0;
+  let maxY = Math.floor((Math.max(...yValues) + 5));
+  
+  if (maxY <= 35) {
+    maxY = 35;
+  }else if (maxY > 1000) {
+    maxY = 1000;
+  }
   
   chart2 = new Chart(ctx2,{
     type: 'scatter',
@@ -494,8 +516,8 @@ console.log(output[6]);
         }
         },
         y:{
-          min: 0,
-          max: 35.0,
+          min: minY,
+          max: maxY,
           position: 'left',
           title: {
             display: true,
@@ -568,6 +590,8 @@ slider[3].oninput = function() {
  mychart2();
  output[3].innerHTML = slider[3].value;
  myTime.innerHTML = slider[3].value;
+ output[7].innerHTML = slider[3].value;
+ output[8].innerHTML = slider[3].value;
   }
 
 slider[4].oninput = function() {

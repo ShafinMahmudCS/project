@@ -115,7 +115,7 @@ var chart1 = new Chart(ctx1,{
       },
       y:{
         min: 0,
-        max: 100.0,
+        max: 35,
         position: 'left',
         title: {
           display: true,
@@ -231,7 +231,7 @@ output[8].innerHTML = slider[8].value;
 
     var xyValues = [];
   
-    for(let i =0; i<xValues.length; i++){
+    for(let i = 0; i<xValues.length; i++){
   
       var obj = {};
       obj.x = xValues[i];
@@ -240,6 +240,16 @@ output[8].innerHTML = slider[8].value;
       var C = a1*BESSEL.besselk(a2,0)*Math.exp((-Math.log(2)/lambda)*time);
       obj.y = C.toFixed(2);
       xyValues.push(obj);
+    }
+
+    let yValues = xyValues.map(obj => parseFloat(obj.y));
+    let minY = 0;
+    let maxY = Math.floor((Math.max(...yValues) + 5));
+    
+    if (maxY <= 35) {
+      maxY = 35;
+    }else if (maxY > 1000) {
+      maxY = 1000;
     }
   
   chart1 = new Chart(ctx1,{
@@ -272,8 +282,8 @@ output[8].innerHTML = slider[8].value;
         }
         },
         y:{
-          min: 0,
-          max: 100.0,
+          min: minY,
+          max: maxY,
           position: 'left',
           title: {
             display: true,

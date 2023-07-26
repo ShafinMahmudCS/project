@@ -308,6 +308,9 @@ output[4].innerHTML = slider[4].value;
 output[5].innerHTML = slider[5].value;
 output[6].innerHTML = slider[6].value;
 output[7].innerHTML = slider[7].value;
+output[8].innerHTML = slider[2].value;
+output[9].innerHTML = slider[2].value;
+
 
 console.log('my', slider[2].value);
 
@@ -347,6 +350,16 @@ console.log('my', slider[2].value);
       obj.y = expo(C, 7);
       xyValues.push(obj);
     }
+
+    let yValues = xyValues.map(obj => parseFloat(obj.y));
+    let minY = 0;
+    let maxY = Math.floor((Math.max(...yValues) + 5));
+    
+    if (maxY <= 100) {
+      maxY = 100;
+    }else if (maxY > 1000) {
+      maxY = 1000;
+    }
   
   chart1 = new Chart(ctx1,{
     type: 'scatter',
@@ -378,8 +391,8 @@ console.log('my', slider[2].value);
         }
         },
         y:{
-          min: 0,
-          max: 100.0,
+          min: minY,
+          max: maxY,
           position: 'left',
           title: {
             display: true,
@@ -464,6 +477,16 @@ var DR = DL/R;
     obj.y = C;
     tyValues.push(obj);
   }
+
+  let yValues = tyValues.map(obj => parseFloat(obj.y));
+  let minY = 0;
+  let maxY = Math.floor((Math.max(...yValues) + 5));
+  
+  if (maxY <= 60) {
+    maxY = 60;
+  }else if (maxY > 1000) {
+    maxY = 1000;
+  }
   
   chart2 = new Chart(ctx2,{
     type: 'scatter',
@@ -495,8 +518,8 @@ var DR = DL/R;
         }
         },
         y:{
-          min: 0,
-          max: 60.0,
+          min: minY,
+          max: maxY,
           position: 'left',
           title: {
             display: true,
@@ -563,6 +586,8 @@ slider[2].oninput = function() {
 mychart2();
 output[2].innerHTML = slider[2].value;
 myTime.innerHTML = slider[2].value;
+output[8].innerHTML = slider[2].value;
+output[9].innerHTML = slider[2].value;
   }
 
 slider[3].oninput = function() {
