@@ -41,7 +41,7 @@ document.getElementById("downloadButton2").addEventListener("click", downloadExc
 var myZoom = false;
 var C0 = 650;
 var q = 4;
-var n = 0.3;
+var n = 0.35;
 var v = q/n;
 var R = 1;
 var vR = v/R;
@@ -162,7 +162,7 @@ var chart2 = new Chart(ctx2,{
 
 var C0 = 650;
 var q = 4;
-var n = 0.3;
+var n = 0.35;
 var v = q/n;
 var R = 1;
 var vR = v/R;
@@ -324,7 +324,7 @@ output[11].innerHTML = slider[3].value;
     //initial conditions (without sorption)
     var C0 = slider[0].value;
     var q = slider[1].value;
-    var n = 0.3;
+    var n = 0.35;
     var v = q/n;
     var R = slider[6].value;
     var vR = v/R;
@@ -455,7 +455,7 @@ output[11].innerHTML = slider[3].value;
     //initial conditions (without sorption)
   var C0 = slider[0].value;
   var q = slider[1].value;
-  var n = 0.3;
+  var n = 0.35;
   v = q/n;
   var R = slider[6].value;
   var vR = v/R;
@@ -663,7 +663,7 @@ function downloadExcel1() {
   // Fetch updated slider values
   var C0 = slider[0].value;
   var q = slider[1].value;
-  var n = 0.3;
+  var n = 0.35;
   var v = q/n;
   var R = slider[6].value;
   var vR = v/R;
@@ -722,7 +722,7 @@ function downloadExcel2() {
   // Fetch updated slider values
   var C0 = slider[0].value;
   var q = slider[1].value;
-  var n = 0.3;
+  var n = 0.35;
   v = q/n;
   var R = slider[6].value;
   var vR = v/R;

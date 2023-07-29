@@ -45,7 +45,7 @@ var Area = 20;
 var n = 0.35;
 var q = Q/Area; 
 var v = 0.187;
-var Dstar = 0.00000864 * 86400; 
+var Dstar = Math.pow(10, -16); 
 var alphaX = 4.919;
 var alphaY = 0.4919;
 var DL = (alphaX*v) + Dstar;
@@ -191,8 +191,7 @@ output[4].innerHTML = slider[4].value;
 output[5].innerHTML = slider[5].value;
 output[6].innerHTML = slider[6].value;
 output[7].innerHTML = slider[7].value;
-output[8].innerHTML = slider[8].value;
-
+output[8].innerHTML = (Math.pow(10, -(25 - parseFloat(slider[8].value)))).toPrecision(1);
 
   // Updating Concentration vs Distance graph
 
@@ -213,13 +212,14 @@ output[8].innerHTML = slider[8].value;
     var b = parseFloat(slider[3].value); 
     var y = parseFloat(slider[4].value); 
     var lambda = parseFloat(slider[5].value); 
-    var Dstar = parseFloat(slider[8].value) * 86400;
+    var Dstar = Math.pow(10, -(25 - parseFloat(slider[8].value)));
     console.log( Dstar);
   
 
     q = Q/Area; 
     v = 0.187;
     var DL = (alphaX*v) + Dstar;
+    console.log("DL", DL);
     var DT = (alphaY*v) + Dstar;
     var DLR = DL/R;
     var DTR = DT/R;
@@ -380,7 +380,7 @@ slider[6].oninput = function() {
         slider[8].oninput = function() {
           mychart();
         
-          output[8].innerHTML = slider[8].value;
+          output[8].innerHTML = (Math.pow(10, -(25 - parseFloat(slider[8].value)))).toPrecision(1);
             }
 
   //button
