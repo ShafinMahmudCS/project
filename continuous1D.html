@@ -110,22 +110,20 @@
       <div class="slidecontainer4">
         <p>
           
-            <span class="blue">Time (t):</span> <span class="demo"></span> day
-            (s)/
-            <span class="pink">Distance (x):</span>
-            <span class="myTime"></span> m
-          
-        </p>
+          Effective diffusion coefficient (D*):
+          <span class="demo"></span> m<sup>2</sup>/s
+      </p>
 
-        <input
-          type="range"
-          min="0"
-          max="500"
-          step="5"
-          value="80"
-          class="slider"
-          id="myRange"
-        />
+      <input
+        type="range"
+        min="0.00000000"
+        max="0.70000000"
+        value="0.00000864"
+        step="0.00000001"
+        class="slider"
+        id="myRange"
+      />
+
       </div>
     </div>
 
@@ -162,7 +160,7 @@
       </div>
     </div>
 
-    <div class="diffContainer">
+    <!-- <div class="diffContainer">
       <div class="slidecontainer1D">
         <p>
           
@@ -180,7 +178,7 @@
           id="myRange"
         />
       </div>
-    </div>
+    </div> -->
 
     <!--Graphs-->
     <div class="canvasSide">
@@ -188,6 +186,15 @@
         <canvas id="canvas1"></canvas>
         <div id="canvas1Time" class="canvas-info">
           <p><span class="blue">Time (t):</span> <span class="demo"></span> day(s)</p>
+                  <input
+          type="range"
+          min="0"
+          max="500"
+          step="5"
+          value="80"
+          class="slider"
+          id="myRange"
+        />
         </div>
       </div>
 
@@ -196,6 +203,15 @@
         <div id="canvas2Distance" class="canvas-info">
           <p> <span class="pink">Distance (x):</span>
             <span class="demo"></span> m</p>
+            <input
+            type="range"
+            min="0"
+            max="500"
+            step="5"
+            value="80"
+            class="slider"
+            id="myRange"
+          />
         </div>
       </div>
     </div>
