@@ -40,14 +40,18 @@ function toggleZoom2() {
 
 function getResponsiveFontSize() {
   const width = window.innerWidth;
-  if (width <= 480) { // For mobile devices
-      return 12;
-  } else if (width <= 1000) { // For tablets
-      return 12;
-  } else if (width <= 1550) { // For small laptops
-      return 15;
-  } else { // For large screens
-      return 17;
+  if (width <= 480) {
+    // For mobile devices
+    return 12;
+  } else if (width <= 1000) {
+    // For tablets
+    return 12;
+  } else if (width <= 1550) {
+    // For small laptops
+    return 15;
+  } else {
+    // For large screens
+    return 17;
   }
 }
 
@@ -60,23 +64,23 @@ document
 
 // Initial Concentration vs Time graph on page load
 var C0 = 25;
-
 var q = 0.2;
-
 var n = 0.35;
 var v = q / n;
 var R = 1;
 var vR = v / R;
 var alpha = 5;
 
-var Dstar = 0.00000864 * 86400;
+var Dstar = Math.pow(10, -16) * 86400;
+console.log(Dstar);
+
 var D = Dstar + alpha * v;
 
 var DR = D / R;
 
 var distance = 80;
 
-var lambda = 90;
+var lambda = 15000;
 
 var ctx2 = document.getElementById("canvas2");
 
@@ -165,7 +169,7 @@ var chart2 = new Chart(ctx2, {
         align: "start",
         padding: {
           bottom: 10,
-        }
+        },
       },
       legend: {
         display: false,
@@ -194,9 +198,6 @@ var chart2 = new Chart(ctx2, {
   },
 });
 
-// Chart.defaults.color = '#fff';
-// Chart.defaults.borderColor = 'rgba(255, 255, 255, 0.1)';
-
 // Initial Concentration vs Distance graph on page load
 var C0 = 25;
 
@@ -208,19 +209,20 @@ var R = 1;
 var vR = v / R;
 var alpha = 5;
 
-var Dstar = 0.00000864 * 86400;
+var Dstar = Math.pow(10, -16) * 86400;
+console.log(Dstar);
 var D = Dstar + alpha * v;
 
 var DR = D / R;
 
-var lambda = 90;
+var lambda = 15000;
 var time = 80;
 
 var ctx1 = document.getElementById("canvas1").getContext("2d");
 
 const xValues = [
-  0, 5, 10, 15, 20, 30, 40, 50, 60, 70, 80, 100, 120, 140, 160, 180, 200, 220,
-  240, 260, 280, 300, 320, 340, 360, 380, 420, 460, 500,
+  0, 1, 2, 3, 4, 5, 10, 15, 20, 30, 40, 50, 60, 70, 80, 100, 120, 140, 160, 180,
+  200, 220, 240, 260, 280, 300, 320, 340, 360, 380, 420, 460, 500,
 ];
 
 var xyValues = [];
@@ -361,12 +363,15 @@ output[1].innerHTML =
   v.toFixed(2) +
   " m/day";
 output[2].innerHTML = slider[2].value;
-output[3].innerHTML = slider[3].value;
+output[3].innerHTML = Math.pow(
+  10,
+  -(25 - parseFloat(slider[3].value))
+).toPrecision(4);
 // myTime.innerHTML = slider[3].value;
 output[4].innerHTML = slider[4].value;
 output[5].innerHTML = slider[5].value;
 output[6].innerHTML = slider[6].value;
-output[7].innerHTML = slider[6].value;
+output[7].innerHTML = slider[7].value;
 // output[8].innerHTML = slider[6].value;
 console.log(output[6]);
 
@@ -385,16 +390,17 @@ function mychart() {
   v = q / n;
   var R = parseFloat(slider[4].value);
   var vR = v / R;
-  var Dstar = parseFloat(slider[3].value) * 86400;
+  var Dstar = Math.pow(10, -(25 - parseFloat(slider[3].value)));
   console.log(Dstar);
-  var D = Dstar + alpha * v;
+  var D = Dstar * 86400 + alpha * v;
   var DR = D / R;
+  console.log(DR);
   var time = parseFloat(slider[6].value);
   var lambda = parseFloat(slider[5].value);
 
   const xValues = [
-    0, 5, 10, 15, 20, 30, 40, 50, 60, 70, 80, 100, 120, 140, 160, 180, 200, 220,
-    240, 260, 280, 300, 320, 340, 360, 380, 420, 460, 500,
+    0, 1, 2, 3, 4, 5, 10, 15, 20, 30, 40, 50, 60, 70, 80, 100, 120, 140, 160,
+    180, 200, 220, 240, 260, 280, 300, 320, 340, 360, 380, 420, 460, 500,
   ];
 
   var xyValues = [];
@@ -478,7 +484,7 @@ function mychart() {
           align: "start",
           padding: {
             bottom: 10,
-          }
+          },
         },
         legend: {
           display: false,
@@ -524,8 +530,8 @@ function mychart2() {
   var v = q / n;
   var R = parseFloat(slider[4].value);
   var vR = v / R;
-  var Dstar = parseFloat(slider[3].value) * 86400;
-  var D = Dstar + alpha * v;
+  var Dstar = Math.pow(10, -(25 - parseFloat(slider[3].value)));
+  var D = Dstar * 86400 + alpha * v;
   var DR = D / R;
   var distance = parseFloat(slider[7].value);
   var lambda = parseFloat(slider[5].value);
@@ -603,7 +609,7 @@ function mychart2() {
             text: "Concentration (mg/L)",
             font: {
               size: getResponsiveFontSize(),
-            }
+            },
           },
         },
       },
@@ -618,7 +624,7 @@ function mychart2() {
           align: "start",
           padding: {
             bottom: 10,
-          }
+          },
         },
         legend: {
           display: false,
@@ -676,7 +682,10 @@ slider[2].oninput = function () {
 slider[3].oninput = function () {
   mychart();
   mychart2();
-  output[3].innerHTML = slider[3].value;
+  output[3].innerHTML = Math.pow(
+    10,
+    -(25 - parseFloat(slider[3].value))
+  ).toPrecision(4);
   myTime.innerHTML = slider[3].value;
   output[7].innerHTML = slider[3].value;
   output[8].innerHTML = slider[3].value;
@@ -706,7 +715,7 @@ slider[7].oninput = function () {
   output[7].innerHTML = slider[7].value;
 };
 
-window.addEventListener('resize', function() {
+window.addEventListener("resize", function () {
   mychart();
   mychart2();
 });
@@ -732,21 +741,23 @@ function downloadExcel1() {
   // Fetch updated slider values
   var C0 = parseFloat(slider[0].value);
   var q = parseFloat(slider[1].value);
-  var alpha = 5;
+  var alpha = parseFloat(slider[2].value);
 
   var n = 0.35;
   v = q / n;
   var R = parseFloat(slider[4].value);
   var vR = v / R;
-  var Dstar = parseFloat(slider[2].value) * 86400;
-  var D = Dstar + alpha * v;
+  var Dstar = Math.pow(10, -(25 - parseFloat(slider[3].value)));
+  console.log(Dstar);
+  var D = Dstar * 86400 + alpha * v;
   var DR = D / R;
-  var time = parseFloat(slider[3].value);
+  console.log(DR);
+  var time = parseFloat(slider[6].value);
   var lambda = parseFloat(slider[5].value);
 
   const xValues = [
-    0, 5, 10, 15, 20, 30, 40, 50, 60, 70, 80, 100, 120, 140, 160, 180, 200, 220,
-    240, 260, 280, 300, 320, 340, 360, 380, 420, 460, 500,
+    0, 1, 2, 3, 4, 5, 10, 15, 20, 30, 40, 50, 60, 70, 80, 100, 120, 140, 160,
+    180, 200, 220, 240, 260, 280, 300, 320, 340, 360, 380, 420, 460, 500,
   ];
 
   var xyValues = [];
@@ -792,16 +803,16 @@ function downloadExcel2() {
   // Fetch updated slider values
   var C0 = parseFloat(slider[0].value);
   var q = parseFloat(slider[1].value);
-  var alpha = 5;
+  var alpha = parseFloat(slider[2].value);
 
   var n = 0.35;
   var v = q / n;
   var R = parseFloat(slider[4].value);
   var vR = v / R;
-  var Dstar = parseFloat(slider[2].value) * 86400;
-  var D = Dstar + alpha * v;
+  var Dstar = Math.pow(10, -(25 - parseFloat(slider[3].value)));
+  var D = Dstar * 86400 + alpha * v;
   var DR = D / R;
-  var distance = parseFloat(slider[3].value);
+  var distance = parseFloat(slider[7].value);
   var lambda = parseFloat(slider[5].value);
 
   const tValues = [

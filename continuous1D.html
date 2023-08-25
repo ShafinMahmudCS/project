@@ -34,19 +34,18 @@
     </div>
 
     <div id="top">
-      <input type="checkbox" id="darkmode-toggle"/>
-<label id="toggleLabel" for="darkmode-toggle">
-  <img src="./images/sun.svg" class="sun" />
-  <img src="./images/moon.svg" class="moon" />
-</label>
+      <input type="checkbox" id="darkmode-toggle" />
+      <label id="toggleLabel" for="darkmode-toggle">
+        <img src="./images/sun.svg" class="sun" />
+        <img src="./images/moon.svg" class="moon" />
+      </label>
 
       <a id="header" href="index.html"
-      ><h1>Subsurface Transport Visualization Tool</h1></a
-    >
+        ><h1>Subsurface Transport Visualization Tool</h1></a
+      >
     </div>
 
     <h2>1D Continuous Injection</h2>
-
 
     <p>
       <b>Constant Conditions:</b> <b>Effective porosity (n<sub>e</sub>)</b> =
@@ -56,9 +55,7 @@
     <!-- Sliders-->
     <div class="container">
       <div class="slidecontainer">
-        <p>
-          Concentration (C) : <span class="demo"></span> mg/L
-        </p>
+        <p>Concentration (C) : <span class="demo"></span> mg/L</p>
 
         <input
           type="range"
@@ -71,9 +68,7 @@
       </div>
 
       <div class="slidecontainer2">
-        <p>
-          Darcy velocity (q): <span class="demo"></span>
-        </p>
+        <p>Darcy velocity (q): <span class="demo"></span></p>
 
         <input
           type="range"
@@ -90,18 +85,16 @@
     <div class="container">
       <div class="slidecontainer3">
         <p>
-          
-            Dispersivity (&alpha;):
-            <span class="demo"></span> m
-          
+          Dispersivity (&alpha;):
+          <span class="demo"></span> m
         </p>
 
         <input
           type="range"
-          min="0"
-          max="15"
-          value="5"
-          step="1"
+          min="1.0"
+          max="15.0"
+          value="5.0"
+          step="0.1"
           class="slider"
           id="myRange"
         />
@@ -109,101 +102,79 @@
 
       <div class="slidecontainer4">
         <p>
-          
           Effective diffusion coefficient (D*):
           <span class="demo"></span> m<sup>2</sup>/s
-      </p>
+        </p>
 
-      <input
-        type="range"
-        min="0.00000000"
-        max="0.70000000"
-        value="0.00000864"
-        step="0.00000001"
-        class="slider"
-        id="myRange"
-      />
-
+        <input
+          type="range"
+          min="9.00"
+          max="28.00"
+          value="9.00"
+          step="0.01"
+          class="slider"
+          id="myRange"
+        />
       </div>
     </div>
 
     <div class="container">
-      <div class="slidecontainer7">
-        <p>
-          Retardation factor (R) : <span class="demo"></span>
-        </p>
+      <div class="slidecontainer5">
+        <p>Retardation factor (R) : <span class="demo"></span></p>
 
         <input
-        type="range"
-        min="1.0"
-        max="20.0"
-        step="0.1"
-        value="1.0"
-        class="slider"
-        id="myRange"
-      />
+          type="range"
+          min="1.0"
+          max="20.0"
+          step="0.1"
+          value="1.0"
+          class="slider"
+          id="myRange"
+        />
       </div>
 
-      <div class="slidecontainer8">
-        <p>
-          Half-life (&lambda;): <span class="demo"></span> day(s)
-        </p>
+      <div class="slidecontainer6">
+        <p>Half-life (&lambda;): <span class="demo"></span> day(s)</p>
 
         <input
           type="range"
           min="0"
           max="15000"
-          value="90"
+          value="15000"
           class="slider"
           id="myRange"
         />
       </div>
     </div>
-
-    <!-- <div class="diffContainer">
-      <div class="slidecontainer1D">
-        <p>
-          
-            Effective diffusion coefficient (D*):
-            <span class="demo"></span> m<sup>2</sup>/s
-        </p>
-
-        <input
-          type="range"
-          min="0.00000000"
-          max="0.70000000"
-          value="0.00000864"
-          step="0.00000001"
-          class="slider"
-          id="myRange"
-        />
-      </div>
-    </div> -->
 
     <!--Graphs-->
     <div class="canvasSide">
       <div class="myCanvas">
         <canvas id="canvas1"></canvas>
         <div id="canvas1Time" class="canvas-info">
-          <p><span class="blue">Time (t):</span> <span class="demo"></span> day(s)</p>
-                  <input
-          type="range"
-          min="0"
-          max="500"
-          step="5"
-          value="80"
-          class="slider"
-          id="myRange"
-        />
+          <p>
+            <span class="blue">Time (t):</span>
+            <span class="demo"></span> day(s)
+          </p>
+          <input
+            type="range"
+            min="0"
+            max="500"
+            step="5"
+            value="80"
+            class="slider"
+            id="myRange"
+          />
         </div>
       </div>
 
       <div class="myCanvas">
         <canvas id="canvas2"></canvas>
         <div id="canvas2Distance" class="canvas-info">
-          <p> <span class="pink">Distance (x):</span>
-            <span class="demo"></span> m</p>
-            <input
+          <p>
+            <span class="pink">Distance (x):</span> <span class="demo"></span> m
+          </p>
+          <input
             type="range"
             min="0"
             max="500"
@@ -248,7 +219,7 @@
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
     ></script>
-   <script src="./script/theme.js"></script>
+    <script src="./script/theme.js"></script>
     <script src="./script/continuous1D.js"></script>
   </body>
 </html>

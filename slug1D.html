@@ -34,7 +34,7 @@
     </div>
 
     <div id="top">
-      <input type="checkbox" id="darkmode-toggle"/>
+      <input type="checkbox" id="darkmode-toggle" />
       <label id="toggleLabel" for="darkmode-toggle">
         <img src="./images/sun.svg" class="sun" />
         <img src="./images/moon.svg" class="moon" />
@@ -54,25 +54,21 @@
     <!-- Sliders-->
     <div class="container">
       <div class="slidecontainer">
-        <p>
-          Mass (M) : <span class="demo"></span> Kg
-        </p>
+        <p>Mass (M) : <span class="demo"></span> Kg</p>
 
         <input
           type="range"
           min="0"
           max="1000"
           step="50"
-          value="1000"
+          value="900"
           class="slider"
           id="myRange"
         />
       </div>
 
       <div class="slidecontainer2">
-        <p>
-          Darcy velocity (q): <span class="demo"></span>
-        </p>
+        <p>Darcy velocity (q): <span class="demo"></span></p>
 
         <input
           type="range"
@@ -88,29 +84,7 @@
 
     <div class="container">
       <div class="slidecontainer4">
-        <p>
-          
-          <span class="blue">Time (t):</span> <span class="demo"></span> day
-          (s)/
-          <span class="pink">Distance (x):</span>
-          <span class="myTime"></span> m
-          
-        </p>
-
-        <input
-          type="range"
-          min="1"
-          max="100"
-          value="50"
-          class="slider"
-          id="myRange"
-        />
-      </div>
-
-      <div class="slidecontainer6">
-        <p>
-          Area (A): <span class="demo"></span> m<sup>2</sup>
-        </p>
+        <p>Area (A): <span class="demo"></span> m<sup>2</sup></p>
 
         <input
           type="range"
@@ -121,13 +95,9 @@
           id="myRange"
         />
       </div>
-    </div>
 
-    <div class="container">
-      <div class="slidecontainer7">
-        <p>
-          Retardation factor (R) : <span class="demo"></span>
-        </p>
+      <div class="slidecontainer6">
+        <p>Retardation factor (R) : <span class="demo"></span></p>
 
         <input
           type="range"
@@ -139,46 +109,26 @@
           id="myRange"
         />
       </div>
+    </div>
 
-      <div class="slidecontainer8">
-        <p>
-          Half-life (&lambda;): <span class="demo"></span> day(s)
-        </p>
+    <div class="container">
+      <div class="slidecontainer7">
+        <p>Half-life (&lambda;): <span class="demo"></span> day(s)</p>
 
         <input
           type="range"
           min="0"
           max="1000"
-          value="500"
+          value="1000"
           class="slider"
           id="myRange"
         />
       </div>
-    </div>
 
-    <div class="container">
-      <div class="slidecontainer9">
+      <div class="slidecontainer8">
         <p>
-          
-          Effective diffusion coefficient (D*):
-          <span class="demo"></span> m<sup>2</sup>/s
-        
-      </p>
-
-      <input
-        type="range"
-        min="0.00000000"
-        max="0.00500000"
-        value="0.00000864"
-        step="0.00000001"
-        class="slider"
-        id="myRange"
-      />
-      </div>
-
-      <div class="slidecontainer10">
-        <p>
-          Longitudinal dispersivity (&alpha;<sub>x</sub>): <span class="demo"></span> m
+          Longitudinal dispersivity (&alpha;<sub>x</sub>):
+          <span class="demo"></span> m
         </p>
 
         <input
@@ -195,7 +145,20 @@
 
     <div class="diffContainer">
       <div class="slidecontainer1D">
+        <p>
+          Effective diffusion coefficient (D*):
+          <span class="demo"></span> m<sup>2</sup>/s
+        </p>
 
+        <input
+          type="range"
+          min="9.00"
+          max="28.00"
+          value="9.00"
+          step="0.01"
+          class="slider"
+          id="myRange"
+        />
       </div>
     </div>
 
@@ -204,15 +167,37 @@
       <div class="myCanvas">
         <canvas id="canvas1"></canvas>
         <div id="canvas1Time" class="canvas-info">
-          <p><span class="blue">Time (t):</span> <span class="demo"></span> day(s)</p>
+          <p>
+            <span class="blue">Time (t):</span>
+            <span class="demo"></span> day(s)
+          </p>
+          <input
+            type="range"
+            min="0"
+            max="500"
+            step="1"
+            value="50"
+            class="slider"
+            id="myRange"
+          />
         </div>
       </div>
 
       <div class="myCanvas">
         <canvas id="canvas2"></canvas>
         <div id="canvas2Distance" class="canvas-info">
-          <p> <span class="pink">Distance (x):</span>
-            <span class="demo"></span> m</p>
+          <p>
+            <span class="pink">Distance (x):</span> <span class="demo"></span> m
+          </p>
+          <input
+            type="range"
+            min="0"
+            max="250"
+            step="1"
+            value="50"
+            class="slider"
+            id="myRange"
+          />
         </div>
       </div>
     </div>
