@@ -32,6 +32,23 @@ function toggleZoom2(){
   mychart2();
 }
 
+function getResponsiveFontSize() {
+  const width = window.innerWidth;
+  if (width <= 480) {
+    // For mobile devices
+    return 12;
+  } else if (width <= 1000) {
+    // For tablets
+    return 12;
+  } else if (width <= 1550) {
+    // For small laptops
+    return 15;
+  } else {
+    // For large screens
+    return 17;
+  }
+}
+
 
 document.getElementById("downloadButton1").addEventListener("click", downloadExcel1);
 document.getElementById("downloadButton2").addEventListener("click", downloadExcel2);
@@ -46,7 +63,7 @@ var v = q/n;
 var R = 1;
 var vR = v/R;
 
-var Dstar = 0.00000864 * 86400;
+var Dstar = Math.pow(10, -16) * 86400;
 var alphaX = 1;
 var alphaY = 0.1;
 var DL =  Dstar + (alphaX*v);
@@ -126,11 +143,15 @@ var chart2 = new Chart(ctx2,{
   responsive: true,
     plugins: {
       title: {
-          display: true,
-          text: 'Concentration with Time',
-          font: {
-            size: 17
-        }
+        display: true,
+        text: "\xA0\xA0\xA0\xA0\xA0\xA0\xA0\xA0\xA0\xA0\xA0\xA0\xA0\xA0\xA0Concentration with Time",
+        font: {
+          size: getResponsiveFontSize(),
+        },
+        align: "start",
+        padding: {
+          bottom: 10,
+        },
       },
       legend: {
         display: false
@@ -167,7 +188,7 @@ var v = q/n;
 var R = 1;
 var vR = v/R;
 
-var Dstar = 0.00000864 * 86400;
+var Dstar = Math.pow(10, -16) * 86400;
 var alphaX = 1;
 var alphaY = 0.1;
 var DL =  Dstar + (alphaX*v);
@@ -248,11 +269,15 @@ var chart1 = new Chart(ctx1,{
   responsive: true,
     plugins: {
       title: {
-          display: true,
-          text: 'Concentration with Distance',
-          font: {
-            size: 17
-        }
+        display: true,
+        text: "\xA0\xA0\xA0\xA0\xA0\xA0\xA0\xA0\xA0\xA0\xA0\xA0\xA0\xA0\xA0Concentration with Distance",
+        font: {
+          size: getResponsiveFontSize(),
+        },
+        align: "start",
+        padding: {
+          bottom: 10,
+        },
       },
       legend: {
         display: false
@@ -299,21 +324,21 @@ var str;
 
 var slider = document.querySelectorAll(".slider"); // all the sliders from HTML
 var output = document.querySelectorAll(".demo");  // all the output fields from HTML
-var myTime = document.querySelector(".myTime");
 
 output[0].innerHTML = slider[0].value;
 output[1].innerHTML = slider[1].value + " m/day, Pore water velocity (v) : " + v.toFixed(2) + " m/day";
 output[2].innerHTML = slider[2].value;
 output[3].innerHTML = slider[3].value;
-myTime.innerHTML = slider[3].value;
 output[4].innerHTML = slider[4].value;
 output[5].innerHTML = slider[5].value;
 output[6].innerHTML = slider[6].value;
 output[7].innerHTML = slider[7].value;
-output[8].innerHTML = slider[8].value;
+output[8].innerHTML = Math.pow(
+  10,
+  -(25 - parseFloat(slider[8].value))
+).toPrecision(4);
 output[9].innerHTML = slider[9].value;
-output[10].innerHTML = slider[3].value;
-output[11].innerHTML = slider[3].value;
+output[10].innerHTML = slider[10].value;
  
 // Updating Concentration vs Distance graph
 
@@ -326,24 +351,24 @@ output[11].innerHTML = slider[3].value;
     var q = slider[1].value;
     var n = 0.35;
     var v = q/n;
-    var R = slider[6].value;
+    var R = slider[4].value;
     var vR = v/R;
     
-    var Dstar = parseFloat(slider[2].value) * 86400;
-    var alphaX = slider[9].value;
-    var alphaY = slider[8].value;
+    var Dstar = Math.pow(10, -(25 - parseFloat(slider[8].value))) * 86400;
+    var alphaX = slider[7].value;
+    var alphaY = slider[6].value;
     var DL =  Dstar + (alphaX*v);
     var Dt = Dstar + (alphaY*v);
     var DLR = DL/R;
     var DtR = Dt/R;
-    var time = slider[3].value;
-    var lambda = slider[7].value;
+    var time = slider[9].value;
+    var lambda = slider[5].value;
 
     console.log('7', slider[7].value);
     
     var x = 75;
-    var y = slider[4].value;
-    var Area = slider[5].value;
+    var y = slider[2].value;
+    var Area = slider[3].value;
     
         const xValues = [0.01, 1, 5, 10, 20, 30, 40, 50, 60, 80, 100, 120, 140, 160, 180, 200, 220, 240, 260, 280, 300, 320, 340, 360, 380, 400, 420, 440, 460, 480, 500];
     
@@ -412,11 +437,15 @@ output[11].innerHTML = slider[3].value;
     responsive: true,
       plugins: {
         title: {
-            display: true,
-            text: 'Concentration with Distance',
-            font: {
-              size: 17
-          }
+          display: true,
+          text: "\xA0\xA0\xA0\xA0\xA0\xA0\xA0\xA0\xA0\xA0\xA0\xA0\xA0\xA0\xA0Concentration with Distance",
+          font: {
+            size: getResponsiveFontSize(),
+          },
+          align: "start",
+          padding: {
+            bottom: 10,
+          },
         },
         legend: {
           display: false
@@ -457,22 +486,25 @@ output[11].innerHTML = slider[3].value;
   var q = slider[1].value;
   var n = 0.35;
   v = q/n;
-  var R = slider[6].value;
+  var R = slider[4].value;
   var vR = v/R;
   
-  var Dstar = parseFloat(slider[2].value) * 86400;
-  var alphaX = slider[9].value;
-  var alphaY = slider[8].value;
+  var Dstar = Math.pow(
+    10,
+    -(25 - parseFloat(slider[8].value))
+  ) * 86400;
+  var alphaX = slider[7].value;
+  var alphaY = slider[6].value;
   var DL =  Dstar + (alphaX*v);
   var Dt = Dstar + (alphaY*v);
   var DLR = DL/R;
   var DtR = Dt/R;
-  var x = slider[3].value;
-  var lambda = slider[7].value;
+  var x = slider[10].value;
+  var lambda = slider[5].value;
   console.log('72', slider[7].value);
   
-  var y = slider[4].value;
-  var Area = slider[5].value;
+  var y = slider[2].value;
+  var Area = slider[3].value;
   
   var tValues = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32];
   
@@ -541,11 +573,15 @@ output[11].innerHTML = slider[3].value;
     responsive: true,
       plugins: {
         title: {
-            display: true,
-            text: 'Concentration with Time',
-            font: {
-              size: 17
-          }
+          display: true,
+          text: "\xA0\xA0\xA0\xA0\xA0\xA0\xA0\xA0\xA0\xA0\xA0\xA0\xA0\xA0\xA0Concentration with Time",
+          font: {
+            size: getResponsiveFontSize(),
+          },
+          align: "start",
+          padding: {
+            bottom: 10,
+          },
         },
         legend: {
           display: false
@@ -631,7 +667,10 @@ output[7].innerHTML = slider[7].value;
   slider[8].oninput = function() {
     mychart();
     mychart2();
-   output[8].innerHTML = slider[8].value;
+   output[8].innerHTML = Math.pow(
+    10,
+    -(25 - parseFloat(slider[8].value))
+  ).toPrecision(4);;
      }
 
      slider[9].oninput = function() {
@@ -639,6 +678,12 @@ output[7].innerHTML = slider[7].value;
       mychart2();
      output[9].innerHTML = slider[9].value;
        }
+
+       slider[10].oninput = function() {
+        mychart();
+        mychart2();
+       output[10].innerHTML = slider[10].value;
+         }
 
   //button
   $(".btn").mousedown(function(){
