@@ -9,11 +9,12 @@
   --button-bg2-color: #243e6e;
   --button-border-color: #6d8d9d;
   --hover-background-color: #182a4cd2;
+  --link-color: #0404b3;
 }
 
 .dark-theme {
   --background-color: #12121a;
-  --default-text-color: white;
+  --default-text-color: rgb(245, 240, 240);
   --heading-color: #dbeaf7;
   --header-footer-background-color: #1c1d29;
   --sub-heading-color: #a19f9f;
@@ -22,6 +23,7 @@
   --button-bg2-color: #4b4b4b6e;
   --button-border-color: #616161;
   --hover-background-color: #373636;
+  --link-color: #ffffff;
 }
 
 body {
@@ -151,7 +153,11 @@ footer {
 }
 
 .links {
+  text-decoration: none;
+  font-style: italic;
   font-weight: bold;
+  color:var(--link-color);
+
 }
 
 @media screen and (max-width: 1220px) {
